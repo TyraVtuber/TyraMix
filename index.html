@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TyraMix · Control de Audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#090614; --bg2:#0f0a20; --panel:#150e2b; --panel2:#1e1440; --line:#33226e;
+  --purple:#8b5cf6; --purple-deep:#4c1d95; --pink:#ff1fd6; --pink-soft:#ff8cec; --cyan:#22e6ea;
+  --text:#ece6f7; --muted:#9a8bb8;
+  --ok:#5dffb1; --warn:#ffc857; --err:#ff4d6d;
+  --glow:0 0 6px rgba(255,31,214,.65),0 0 20px rgba(255,31,214,.3);
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --display:'Orbitron','Segoe UI',system-ui,sans-serif;
+  --fs:clamp(12px,1.6vw,14.5px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+body{
+  font-family:var(--font);color:var(--text);font-size:var(--fs);
+  background:
+    radial-gradient(900px 500px at 85% -10%,rgba(139,92,246,.22),transparent 60%),
+    radial-gradient(700px 500px at -10% 110%,rgba(255,31,214,.13),transparent 60%),
+    radial-gradient(600px 400px at 110% 105%,rgba(34,230,234,.08),transparent 60%),
+    var(--bg);
+  overflow-x:hidden;
+}
+.app{min-height:100dvh;display:flex;flex-direction:column}
+
+/* ---------- Header: ocultar / mostrar ---------- */
+header{display:flex;align-items:center;gap:10px;padding:clamp(7px,2vh,10px) 12px;flex-wrap:nowrap;
+  background:linear-gradient(180deg,rgba(28,15,50,.95),rgba(16,8,28,.85));
+  border-bottom:1px solid var(--line);position:relative;z-index:2;
+  max-height:200px;overflow:hidden;
+  transition:max-height .3s ease,opacity .22s ease,padding .3s ease,border-color .3s ease}
+.app.hdr-collapsed header{max-height:0;padding-top:0;padding-bottom:0;opacity:0;border-bottom-color:transparent;pointer-events:none}
+#hideBar svg{width:15px;height:15px;vertical-align:-2px;transition:.2s}
+.app.hdr-collapsed #hideBar svg{transform:rotate(180deg)}
+.hdr-peek{position:fixed;top:0;left:50%;transform:translate(-50%,-100%);z-index:30;
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+  background:var(--panel2);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;color:var(--muted);
+  padding:5px 16px 6px;font:600 .74em var(--font);letter-spacing:.04em;
+  box-shadow:0 6px 16px rgba(0,0,0,.4);
+  transition:transform .28s ease,color .18s,border-color .18s}
+.app.hdr-collapsed .hdr-peek{transform:translate(-50%,0)}
+.hdr-peek:hover{color:var(--text);border-color:var(--cyan)}
+.hdr-peek svg{width:11px;height:11px}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),var(--purple),transparent);opacity:.85}
+.brand{display:flex;align-items:center;gap:9px;margin-right:auto;min-width:0;flex:1 1 auto}
+.crest{height:36px;width:auto;flex:none;filter:drop-shadow(0 0 7px rgba(34,230,234,.4))}
+.brand h1{font-family:var(--display);font-weight:800;font-size:clamp(13px,2.2vw,17px);letter-spacing:.14em;color:#8ff5ff;text-shadow:0 0 12px rgba(34,230,234,.4);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.brand h1 b{color:var(--pink);text-shadow:var(--glow)}
+.pill{display:inline-flex;align-items:center;gap:7px;color:var(--text);flex:none;
+  background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+  padding:6px 12px;font:600 .78em var(--font)}
+.dot{width:8px;height:8px;border-radius:50%;background:#6b5c86;box-shadow:0 0 0 2px rgba(255,255,255,.04);flex:none}
+[data-s=ok] .dot{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+[data-s=connecting] .dot{background:var(--warn);animation:pulse 1s infinite}
+[data-s=error] .dot{background:var(--err);box-shadow:0 0 8px var(--err)}
+@keyframes pulse{50%{opacity:.35}}
+.iconbtn{cursor:pointer;color:var(--text);background:var(--panel2);border:1px solid var(--line);
+  border-radius:10px;padding:7px 10px;transition:.18s;display:inline-flex;align-items:center;font-size:1em;flex:none}
+.iconbtn:hover{border-color:var(--cyan);box-shadow:0 0 12px rgba(34,230,234,.3)}
+
+/* ---------- Main ---------- */
+main{flex:1;padding:clamp(10px,3vh,16px) 8px clamp(14px,3vh,20px);display:flex;flex-direction:column;
+  gap:clamp(10px,2.5vh,16px);max-width:520px;margin:0 auto;width:100%;transition:max-width .25s ease}
+.banner{font-size:.78em;color:var(--warn);background:rgba(255,200,87,.08);border:1px solid rgba(255,200,87,.3);
+  border-radius:10px;padding:9px 12px;line-height:1.5;display:none}
+.banner.show{display:block}
+
+/* Mixer (arriba) */
+/* Una sola fila: las tarjetas se van achicando (con un mínimo prolijo) para
+   que entren todas las fuentes sin cortarse ni bajar a otra línea. Si aun
+   así son demasiadas para el ancho disponible, recién ahí el marco se
+   desliza horizontalmente en vez de deformarlas más. */
+.mixer{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:clamp(6px,2vw,10px);background:var(--panel);
+  border:1px solid var(--line);border-radius:16px;padding:clamp(10px,2.6vh,16px) clamp(6px,2vw,10px) clamp(8px,2vh,14px);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.mixer::-webkit-scrollbar{display:none;height:0}
+.channel{flex:1 1 clamp(56px,20vw,92px);min-width:56px;display:flex;flex-direction:column;align-items:center;
+  gap:clamp(5px,1.1vh,8px);padding:clamp(8px,1.4vh,10px) 6px;background:var(--panel2);border:1px solid var(--line);border-radius:14px}
+.channel .icon{width:clamp(18px,4.4vh,24px);height:clamp(18px,4.4vh,24px);color:#fff;
+  filter:drop-shadow(0 0 3px rgba(255,255,255,.35));flex:none}
+.channel .icon svg{display:block;width:100%;height:100%}
+.channel .name{font:700 .64em var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.stage{position:relative;width:40px;height:clamp(70px,24vh,150px);display:flex;align-items:center;justify-content:center;flex:0 0 auto;overflow:hidden}
+.meter{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:11px;height:100%;
+  border-radius:5px;background:linear-gradient(180deg,#050309,#0c0818);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 2px 5px rgba(0,0,0,.7);overflow:hidden;z-index:1}
+.meter-fill{position:absolute;bottom:0;left:0;right:0;top:auto;height:calc(var(--lvl,0)*100%);width:auto;
+  background:
+    repeating-linear-gradient(0deg,rgba(5,3,9,.9) 0,rgba(5,3,9,.9) 2px,transparent 2px,transparent 6px),
+    linear-gradient(0deg,var(--ok) 0%,var(--ok) 66%,var(--warn) 66%,var(--warn) 88%,var(--err) 88%,var(--err) 100%);
+  box-shadow:0 0 8px rgba(93,255,177,.35);transition:height .09s linear}
+input[type=range].fader{position:absolute;top:50%;left:50%;width:calc(clamp(70px,24vh,150px) - 8px);height:30px;
+  transform:translate(-50%,-50%) rotate(-90deg);-webkit-appearance:none;-moz-appearance:none;appearance:none;
+  background:transparent;outline:none;cursor:grab;margin:0;z-index:2}
+input[type=range].fader:active{cursor:grabbing}
+input[type=range].fader::-webkit-slider-runnable-track{width:100%;height:6px;border-radius:4px;
+  background:linear-gradient(90deg,#08050f,var(--line));box-shadow:inset 0 1px 3px rgba(0,0,0,.75)}
+input[type=range].fader::-moz-range-track{width:100%;height:6px;border-radius:4px;
+  background:linear-gradient(90deg,#08050f,var(--line));box-shadow:inset 0 1px 3px rgba(0,0,0,.75)}
+input[type=range].fader::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:15px;border-radius:4px;
+  background:linear-gradient(180deg,#3a2c66,#170f2f 60%,#0e081d);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2px var(--accent),0 0 10px 1px var(--accent),inset 0 1px 0 rgba(255,255,255,.2);
+  border:none;cursor:grab;margin-top:-4.5px}
+input[type=range].fader::-moz-range-thumb{width:28px;height:15px;border-radius:4px;
+  background:linear-gradient(180deg,#3a2c66,#170f2f 60%,#0e081d);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2px var(--accent),0 0 10px 1px var(--accent),inset 0 1px 0 rgba(255,255,255,.2);
+  border:none;cursor:grab}
+input[type=range].fader::-moz-focus-outer{border:0}
+.value{font:800 .78em var(--display);color:var(--text)}
+.mute-btn{cursor:pointer;width:100%;text-align:center;border:1px solid var(--line);background:var(--bg2);
+  color:var(--muted);border-radius:8px;padding:5px 4px;font:700 .64em var(--font);letter-spacing:.03em;transition:.15s}
+.mute-btn:hover{border-color:var(--cyan)}
+.mute-btn.on{color:#fff;border-color:var(--err);background:rgba(255,77,109,.16);box-shadow:0 0 10px rgba(255,77,109,.35)}
+
+/* Profiles (abajo) */
+.profiles{display:flex;gap:clamp(8px,2vw,12px);justify-content:center;flex-wrap:wrap}
+.profile-btn{flex:0 0 auto;cursor:pointer;text-align:center;padding:9px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel2);color:var(--muted);font:700 .78em var(--display);letter-spacing:.07em;transition:.18s;text-transform:uppercase;white-space:nowrap}
+.profile-btn:hover{border-color:var(--purple);color:var(--text);transform:translateY(-1px)}
+.profile-btn.active{color:#fff;border-color:var(--pink);background:linear-gradient(135deg,rgba(255,31,214,.28),rgba(139,92,246,.22));box-shadow:var(--glow)}
+.profile-btn.profile-add{border-style:dashed;color:var(--muted);font-size:.78em;padding:9px 14px}
+.profile-btn.profile-add:hover{color:var(--pink-soft);border-color:var(--pink)}
+.profile-add-input{flex:0 0 auto;background:var(--bg2);border:1px solid var(--purple);color:var(--text);
+  border-radius:999px;padding:11px 18px;font:700 .78em var(--display);letter-spacing:.05em;outline:none;
+  width:150px;max-width:44vw}
+.profile-add-input:focus{box-shadow:0 0 0 1px var(--purple)}
+
+/* ---------- Dialog (settings) ---------- */
+dialog{margin:auto;width:min(560px,94vw);max-height:92dvh;overflow:auto;scrollbar-width:none;-ms-overflow-style:none;
+  background:var(--panel);color:var(--text);border:1px solid var(--purple);border-radius:16px;padding:0;
+  box-shadow:0 0 24px rgba(139,92,246,.3)}
+dialog::backdrop{background:rgba(6,3,12,.85)}
+dialog::-webkit-scrollbar{display:none}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+.dlg-h h2{font:800 .9em var(--display);letter-spacing:.1em}
+.dlg-h h2 b{color:var(--pink)}
+.dlg-b{padding:14px 18px 6px;display:grid;gap:16px}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 14px 14px;display:grid;gap:9px}
+legend{padding:0 8px;font:700 .78em var(--display);letter-spacing:.08em;color:var(--pink-soft)}
+label{display:grid;gap:4px;font-size:.76em;color:var(--muted)}
+input[type=text],input[type=password]{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+  padding:9px 11px;font:inherit;font-size:1.02em;outline:none;width:100%}
+input[type=text]:focus,input[type=password]:focus{border-color:var(--purple);box-shadow:0 0 0 1px var(--purple)}
+select{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;
+  font:inherit;font-size:.95em;outline:none;width:100%}
+select:focus{border-color:var(--cyan)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;
+  padding:8px 14px;font:600 .8em var(--font);transition:.15s}
+.btn:hover{border-color:var(--purple)}
+.btn.pri{border-color:var(--pink);color:#fff;background:linear-gradient(135deg,rgba(255,31,214,.35),rgba(139,92,246,.3));box-shadow:var(--glow)}
+.hint{font-size:.72em;color:var(--muted);line-height:1.55}
+.hint code{background:var(--bg2);padding:1px 5px;border-radius:4px;color:var(--pink-soft)}
+.note{display:none;font-size:.74em;line-height:1.45;padding:7px 10px;border-radius:8px}
+.note.show{display:block}
+.note.err{color:#ff9db0;background:rgba(255,77,109,.09);border:1px solid rgba(255,77,109,.35)}
+.note.ok{color:var(--ok);background:rgba(93,255,177,.07);border:1px solid rgba(93,255,177,.3)}
+.switch{display:flex;align-items:center;gap:10px;font-size:.86em;color:var(--text);cursor:pointer;position:relative}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.switch i{width:38px;height:22px;border-radius:999px;background:var(--line);position:relative;transition:.15s;flex:none}
+.switch i::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:.15s}
+.switch input:checked+i{background:rgba(255,31,214,.35)}
+.switch input:checked+i::after{left:19px;background:var(--pink);box-shadow:0 0 8px rgba(255,31,214,.7)}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+details summary{cursor:pointer;color:var(--pink-soft);font:700 .78em var(--display);letter-spacing:.06em;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;gap:8px}
+details summary::-webkit-details-marker{display:none}
+.prof-del{cursor:pointer;background:transparent;border:none;color:var(--muted);font-size:1.05em;line-height:1;
+  padding:2px 5px;border-radius:6px;flex:none}
+.prof-del:hover{color:#ff9db0;background:rgba(255,77,109,.14)}
+.prof-grid{display:grid;gap:10px;padding-top:10px}
+.prof-row{display:grid;grid-template-columns:70px 1fr 40px auto;gap:8px;align-items:center;font-size:.82em}
+.prof-row input[type=range]{width:100%;accent-color:var(--pink)}
+.prof-row .mini-switch{transform:scale(.85)}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:12px 18px 16px}
+textarea{width:100%;min-height:90px;background:var(--bg2);border:1px solid var(--line);color:var(--text);
+  border-radius:8px;padding:8px 10px;font:11px/1.4 monospace;outline:none;resize:vertical}
+
+/* Fuentes de audio (icono + nombre editable + select de OBS + borrar) */
+.chmap-list{display:grid;gap:9px}
+.chmap-row{display:grid;grid-template-columns:20px minmax(0,1fr) minmax(0,1.25fr) auto;gap:8px;align-items:center}
+.chmap-icon{width:18px;height:18px;flex:none;display:flex}
+.chmap-icon svg{width:100%;height:100%;display:block}
+.chmap-name{padding:7px 9px;font-size:.86em}
+.chmap-select{padding:7px 9px;font-size:.86em}
+.chmap-del{cursor:pointer;background:transparent;border:none;color:var(--muted);font-size:1.05em;line-height:1;
+  padding:2px 5px;border-radius:6px;flex:none}
+.chmap-del:hover{color:#ff9db0;background:rgba(255,77,109,.14)}
+.chmap-del-spacer{width:24px;flex:none}
+
+/* ---------- Modo compacto: ventanas bajas (docks de OBS, browser sources) ---------- */
+/* Reacomoda todo en barras horizontales apiladas, al estilo del mezclador de OBS,
+   sin tocar colores/estética: solo cambia cómo se distribuyen los elementos. */
+@media (max-height:420px){
+  .mute-btn{width:20px;min-width:20px;height:20px;padding:0;border-radius:5px}
+
+  header{padding:4px 10px;gap:4px 7px}
+  .crest{height:24px}
+  .brand h1{font-size:11px}
+  .pill{padding:4px 9px;font-size:.7em}
+  .iconbtn{padding:5px 7px;font-size:.85em}
+  /* Perfiles a la izquierda, mezclador ocupando el resto a la derecha */
+  main{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"banner banner" "profiles mixer";
+    align-items:start;padding:4px 8px 6px;gap:6px 8px;max-width:min(97vw,1100px)}
+  .banner{grid-area:banner;font-size:.7em;padding:5px 10px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* Mezclador: una fila horizontal completa por canal, apiladas verticalmente
+     (como las barras de OBS), en vez de casillas repartidas en columnas. */
+  .mixer{grid-area:mixer;display:flex;flex-direction:column;gap:8px;padding:9px 11px;min-width:0}
+  .channel{display:grid;grid-template-columns:26px minmax(0,1fr) auto;grid-template-rows:auto auto;
+    column-gap:9px;row-gap:5px;
+    grid-template-areas:"icon name value" "mute stage stage";
+    align-items:center;padding:8px 11px;min-width:0}
+  .channel .icon{grid-area:icon;width:16px;height:16px}
+  .channel .name{grid-area:name;text-align:left;font-size:.7em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .value{grid-area:value;text-align:right;font-size:.76em;white-space:nowrap}
+  /* Botón de mute: se vuelve icono (en vez de texto, que quedaba cortado) */
+  .mute-btn{grid-area:mute;width:26px;height:26px;min-width:26px;margin-top:0;padding:0;
+    font-size:0;line-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .mute-btn::before{content:'';display:block;width:13px;height:13px;background-color:currentColor;
+    -webkit-mask:no-repeat center/contain;mask:no-repeat center/contain;
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9v6h4l5 4V5L8 9H4z'/%3E%3Cpath d='M16.5 9a4.5 4.5 0 0 1 0 6'/%3E%3Cpath d='M19 6a8 8 0 0 1 0 12'/%3E%3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9v6h4l5 4V5L8 9H4z'/%3E%3Cpath d='M16.5 9a4.5 4.5 0 0 1 0 6'/%3E%3Cpath d='M19 6a8 8 0 0 1 0 12'/%3E%3C/svg%3E")}
+  .mute-btn.on::before{
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9v6h4l5 4V5L8 9H4z'/%3E%3Cline x1='16' y1='9' x2='22' y2='15'/%3E%3Cline x1='22' y1='9' x2='16' y2='15'/%3E%3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9v6h4l5 4V5L8 9H4z'/%3E%3Cline x1='16' y1='9' x2='22' y2='15'/%3E%3Cline x1='22' y1='9' x2='16' y2='15'/%3E%3C/svg%3E")}
+  /* Medidor de nivel en horizontal: es su propia franja "de VU" (antes competía
+     visualmente con la pista nativa del control de volumen, que quedaba encimada
+     y se veía sucia). Ahora la pista del control queda invisible, el medidor es
+     más grueso y con marcas de umbral, y el control se ve como una aguja fina. */
+  .stage{grid-area:stage;position:relative;width:100%;height:34px;display:flex;align-items:center;justify-content:center;overflow:visible}
+  .meter{position:absolute;inset:50% 0 auto 0;transform:translateY(-50%);width:100%;height:15px;
+    border-radius:8px;overflow:hidden;z-index:1;
+    background:
+      linear-gradient(90deg,transparent 0 65.4%,rgba(255,255,255,.16) 65.4% 66.2%,transparent 66.2% 87.4%,rgba(255,255,255,.16) 87.4% 88.2%,transparent 88.2%),
+      linear-gradient(180deg,#0d0920,#050309);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 2px 6px rgba(0,0,0,.75)}
+  .meter-fill{left:0;right:auto;top:0;bottom:0;height:100%;width:calc(var(--lvl,0)*100%);border-radius:inherit;
+    background:
+      repeating-linear-gradient(90deg,rgba(5,3,9,.88) 0,rgba(5,3,9,.88) 2px,transparent 2px,transparent 7px),
+      linear-gradient(90deg,var(--ok) 0%,var(--ok) 66%,var(--warn) 66%,var(--warn) 88%,var(--err) 88%,var(--err) 100%);
+    box-shadow:0 0 10px rgba(93,255,177,.4)}
+  input[type=range].fader{position:absolute;top:50%;left:0;width:100%;height:24px;transform:translateY(-50%);margin:0;z-index:2}
+  input[type=range].fader::-webkit-slider-runnable-track{height:15px;background:transparent;box-shadow:none}
+  input[type=range].fader::-moz-range-track{height:15px;background:transparent;box-shadow:none}
+  input[type=range].fader::-webkit-slider-thumb{width:7px;height:25px;border-radius:3px;margin-top:-5px;
+    background:linear-gradient(180deg,#fff 0%,#d9d2f2 22%,#3a2c66 55%,#170f2f 85%,#0e081d 100%);
+    box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2px var(--accent),0 0 9px 1px var(--accent)}
+  input[type=range].fader::-moz-range-thumb{width:7px;height:25px;border-radius:3px;
+    background:linear-gradient(180deg,#fff 0%,#d9d2f2 22%,#3a2c66 55%,#170f2f 85%,#0e081d 100%);
+    box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2px var(--accent),0 0 9px 1px var(--accent)}
+  /* Más recorrido útil para las barras horizontales. */
+  .stage{min-width:200px}
+  .profiles{grid-area:profiles;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;align-items:flex-start;gap:6px;margin-left:-3px}
+  .profile-btn{width:104px;height:30px;padding:6px 7px;font-size:.62em;white-space:nowrap;text-align:center}
+  .profile-add-input{width:104px;height:30px;max-width:104px;padding:7px 7px;font-size:.62em;text-align:center}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <button id="reopenBar" class="hdr-peek" title="Mostrar barra superior" aria-label="Mostrar barra superior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    TyraMix
+  </button>
+  <header id="topbar">
+    <div class="brand"><img class="crest" src="data:image/webp;base64,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" alt="Emblema"><h1>TYRA<b>MIX</b></h1></div>
+    <div class="pill" id="obsStatus" data-s="off" title="OBS desconectado"><span class="dot"></span><span id="obsStatusTxt">OBS</span></div>
+    <button class="iconbtn" id="openSettings" title="Ajustes" aria-label="Ajustes">⚙️</button>
+    <button class="iconbtn" id="hideBar" title="Ocultar barra superior" aria-label="Ocultar barra superior" aria-expanded="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+  </header>
+
+  <main>
+    <div class="banner" id="setupBanner">
+      Todavía no conectaste TyraMix a OBS ni asignaste tus fuentes de audio. Abrí ⚙️ Ajustes para configurarlo — abajo de este mensaje tenés los pasos.
+    </div>
+
+    <div class="mixer" id="mixer"><!-- canales generados por JS --></div>
+
+    <div class="profiles" role="tablist" aria-label="Perfiles de audio" id="profilesBar">
+      <button class="profile-btn profile-add" id="addProfileBtn" type="button" title="Añadir perfil" aria-label="Añadir perfil">+</button>
+    </div>
+  </main>
+</div>
+
+<dialog id="settings">
+  <div class="dlg-h"><h2>Ajustes de <b>TyraMix</b></h2><button class="iconbtn" id="closeSettings" aria-label="Cerrar">✕</button></div>
+  <div class="dlg-b">
+
+    <fieldset>
+      <legend>Conexión a OBS</legend>
+      <label>URL de obs-websocket
+        <input type="text" id="obsUrl" placeholder="ws://localhost:4455">
+      </label>
+      <label>Contraseña (dejar vacío si desactivaste la autenticación)
+        <input type="password" id="obsPass" placeholder="••••••••">
+      </label>
+      <div class="btns">
+        <button class="btn pri" id="btnConnect">Conectar</button>
+        <button class="btn" id="btnDisconnect">Desconectar</button>
+        <label class="switch" style="margin-left:auto"><input type="checkbox" id="autoConnect"><i></i>Autoconectar al abrir</label>
+      </div>
+      <div class="note" id="connNote"></div>
+      <details>
+        <summary>¿Cómo habilito esto en OBS?</summary>
+        <p class="hint" style="margin-top:8px">
+          1. En OBS andá a <code>Herramientas → Configuración del servidor WebSocket</code>.<br>
+          2. Activá <code>Habilitar servidor WebSocket</code>.<br>
+          3. Anotá el <code>Puerto</code> (por defecto 4455) y, si querés, la <code>Contraseña</code>. Si desactivás "Habilitar autenticación" dejá el campo de arriba vacío.<br>
+          4. Si el puerto no es 4455, usá <code>ws://localhost:TU_PUERTO</code> arriba.
+        </p>
+      </details>
+    </fieldset>
+
+    <fieldset>
+      <legend>Fuentes de audio</legend>
+      <p class="hint">Elegí qué fuente de OBS controla cada canal y ponele el nombre que quieras. Conectate primero para ver la lista de fuentes de OBS.</p>
+      <div class="chmap-list" id="channelMapping"></div>
+      <div class="btns" id="addChannelRow"><button class="btn" type="button" id="addChannelBtn">+ Añadir fuente de audio</button></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Perfiles</legend>
+      <p class="hint">Editá los valores que aplica cada perfil al tocarlo (se guardan solos). Para crear uno nuevo, tocá el "+" junto a los perfiles. Para borrar uno, usá el 🗑️ de aquí abajo.</p>
+      <div id="profileEditors"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Preferencias</legend>
+      <label class="switch"><input type="checkbox" id="soundsToggle" checked><i></i>Sonidos de la interfaz</label>
+      <div class="btns">
+        <button class="btn" id="btnExport">Exportar configuración</button>
+        <button class="btn" id="btnImport">Importar</button>
+        <button class="btn" id="btnReset" style="margin-left:auto;border-color:var(--err);color:#ff9db0">Restablecer todo</button>
+      </div>
+      <textarea id="configBox" placeholder="Tu configuración en JSON aparece acá al exportar. Pegá una para importar." hidden></textarea>
+    </fieldset>
+
+  </div>
+  <div class="dlg-f"><button class="btn pri" id="doneSettings">Listo</button></div>
+</dialog>
+
+<script>
+/* ================= Estado y almacenamiento ================= */
+const ICONS = {
+  music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l10-2v13"/><circle cx="7" cy="18" r="2.3" fill="currentColor" stroke="none"/><circle cx="17" cy="16" r="2.3" fill="currentColor" stroke="none"/></svg>',
+  mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>',
+  game: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="9" rx="4.5"/><line x1="7" y1="10.5" x2="7" y2="14.5"/><line x1="5" y1="12.5" x2="9" y2="12.5"/><circle cx="16" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="18.2" cy="13.5" r="1" fill="currentColor" stroke="none"/></svg>',
+  discord: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5z"/></svg>',
+};
+// Ícono por defecto para las fuentes que agrega el usuario: mismo estilo de trazo que
+// los demás (mismo viewBox, grosor y "currentColor"), así encaja visualmente con el resto.
+const DEFAULT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9a4.5 4.5 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg>';
+// Paleta de colores para ir asignando a las fuentes nuevas, distinta de la de los 4 canales
+// de base, así cada una tiene su propio color y todas conviven bien entre sí.
+const EXTRA_ACCENTS = ['#ffc857','#5dffb1','#ff6b6b','#4dd0ff','#b98bff','#ffa1e0','#7ee787','#ffb3c7'];
+const MAX_CUSTOM_CHANNELS = 8;
+
+const BASE_CHANNELS = [
+  {key:'music',   label:'Música',     accent:'#22e6ea'},
+  {key:'mic',     label:'Micrófono',  accent:'#ff1fd6'},
+  {key:'game',    label:'Juego',      accent:'#8b5cf6'},
+  {key:'discord', label:'Discord',    accent:'#7c8cff'},
+];
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Canales base + fuentes agregadas por el usuario, con el nombre ya resuelto
+// (usa el sobrenombre guardado si lo hay) y el ícono/color que corresponda.
+function getChannels(){
+  const base = BASE_CHANNELS.map(c=>({key:c.key, label:(config.labels && config.labels[c.key]) || c.label, accent:c.accent, icon:ICONS[c.key], custom:false}));
+  const custom = (config.customChannels||[]).map(c=>({key:c.key, label:c.label, accent:c.accent, icon:DEFAULT_ICON, custom:true}));
+  return base.concat(custom);
+}
+function getChannelKeys(){ return getChannels().map(c=>c.key); }
+function slugifyChannelKey(label){
+  let base = label.toString().trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/(^-+|-+$)/g,'');
+  if(!base) base = 'fuente';
+  const used = new Set([...BASE_CHANNELS.map(c=>c.key), ...(config.customChannels||[]).map(c=>c.key)]);
+  let key = base, i = 2;
+  while(used.has(key)){ key = base+'-'+i; i++; }
+  return key;
+}
+
+function defaultConfig(){
+  return {
+    obs:{ url:'ws://localhost:4455', password:'' },
+    autoConnect:false,
+    soundsEnabled:true,
+    barHidden:false,
+    activeProfile:'inicio',
+    sources:{ music:'', mic:'', game:'', discord:'' },
+    labels:{},            // sobrenombres de los canales base: {music:'Spotify', ...}
+    customChannels:[],    // fuentes agregadas por el usuario: {key,label,accent}
+    profileList:[
+      {key:'inicio',       label:'Inicio'},
+      {key:'justchatting', label:'Just Chatting'},
+      {key:'game',          label:'Game'},
+    ],
+    profiles:{
+      inicio:       { music:{vol:80,mute:false}, mic:{vol:60,mute:true},  game:{vol:50,mute:true},  discord:{vol:40,mute:true} },
+      justchatting: { music:{vol:22,mute:false}, mic:{vol:85,mute:false}, game:{vol:0, mute:true},  discord:{vol:35,mute:true} },
+      game:         { music:{vol:15,mute:false}, mic:{vol:70,mute:false}, game:{vol:80,mute:false}, discord:{vol:55,mute:false} },
+    }
+  };
+}
+
+/* Rellena huecos (perfiles sin algún canal, canal nuevo agregado en una
+   actualización, etc.) y garantiza que activeProfile exista de verdad. */
+function normalizeConfig(raw){
+  const d = defaultConfig();
+  const merged = {...d, ...raw, obs:{...d.obs,...raw.obs}, sources:{...d.sources,...(raw.sources||{})}, labels:{...(raw.labels||{})}};
+  merged.customChannels = Array.isArray(raw.customChannels)
+    ? raw.customChannels.filter(c=>c && c.key && c.label).map(c=>({key:String(c.key), label:String(c.label).slice(0,18), accent:c.accent||EXTRA_ACCENTS[0]}))
+    : [];
+  merged.profileList = Array.isArray(raw.profileList) && raw.profileList.length ? raw.profileList : d.profileList;
+  merged.profiles = raw.profiles && Object.keys(raw.profiles).length ? raw.profiles : d.profiles;
+  const allKeys = BASE_CHANNELS.map(c=>c.key).concat(merged.customChannels.map(c=>c.key));
+  allKeys.forEach(k=>{ if(!(k in merged.sources)) merged.sources[k] = ''; });
+  merged.profileList.forEach(pm=>{
+    if(!merged.profiles[pm.key]) merged.profiles[pm.key] = {};
+    allKeys.forEach(k=>{ if(!merged.profiles[pm.key][k]) merged.profiles[pm.key][k] = {vol:50, mute:false}; });
+  });
+  if(!merged.profileList.some(pm=>pm.key===merged.activeProfile)){
+    merged.activeProfile = merged.profileList[0] ? merged.profileList[0].key : 'inicio';
+  }
+  return merged;
+}
+
+const STORE_KEY = 'tyramix_config_v1';
+function loadConfig(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return defaultConfig();
+    return normalizeConfig(JSON.parse(raw));
+  }catch(e){ return defaultConfig(); }
+}
+function saveConfig(){ localStorage.setItem(STORE_KEY, JSON.stringify(config)); }
+
+let config = loadConfig();
+let channelState = {}; // valores en vivo mostrados en la UI
+getChannelKeys().forEach(k=>{ channelState[k] = {vol:0, mute:false}; });
+
+
+/* ================= Sonidos (sintetizados, sin archivos) ================= */
+let audioCtx;
+function actx(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function beep({freq=440,dur=.08,type='sine',gain=.05,slideTo=null}={}){
+  if(!config.soundsEnabled) return;
+  try{
+    const ac = actx();
+    const osc = ac.createOscillator(), g = ac.createGain();
+    osc.type = type; osc.frequency.setValueAtTime(freq, ac.currentTime);
+    if(slideTo) osc.frequency.exponentialRampToValueAtTime(Math.max(slideTo,1), ac.currentTime+dur);
+    g.gain.setValueAtTime(gain, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(.0001, ac.currentTime+dur);
+    osc.connect(g); g.connect(ac.destination);
+    osc.start(); osc.stop(ac.currentTime+dur+.02);
+  }catch(e){}
+}
+const SFX = {
+  click:  ()=>beep({freq:740,dur:.06,type:'sine',gain:.05}),
+  tick:   ()=>beep({freq:520,dur:.03,type:'square',gain:.02}),
+  muteOn: ()=>beep({freq:320,dur:.12,type:'sine',gain:.06,slideTo:140}),
+  muteOff:()=>beep({freq:380,dur:.10,type:'sine',gain:.06,slideTo:680}),
+  profile:()=>{beep({freq:520,dur:.09,type:'triangle',gain:.05}); setTimeout(()=>beep({freq:780,dur:.12,type:'triangle',gain:.05}),90);},
+  ok:     ()=>{beep({freq:600,dur:.08,gain:.05}); setTimeout(()=>beep({freq:900,dur:.14,gain:.05}),80);},
+  err:    ()=>beep({freq:220,dur:.28,type:'sawtooth',gain:.05,slideTo:100}),
+};
+
+/* ================= obs-websocket (protocolo v5) ================= */
+const SUBSCRIPTIONS = 1 /*General*/ | 8 /*Inputs*/ | 65536 /*InputVolumeMeters*/;
+let ws=null, connected=false, requestSeq=0; const pending={};
+
+async function sha256b64(str){
+  const enc = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', enc);
+  return btoa(String.fromCharCode(...new Uint8Array(hash)));
+}
+async function computeAuth(password, salt, challenge){
+  const secret = await sha256b64(password + salt);
+  return await sha256b64(secret + challenge);
+}
+function send(obj){ if(ws && ws.readyState===1) ws.send(JSON.stringify(obj)); }
+function request(requestType, requestData={}){
+  return new Promise((resolve,reject)=>{
+    const requestId = 'r'+(++requestSeq);
+    pending[requestId] = {resolve,reject};
+    send({op:6, d:{requestType, requestId, requestData}});
+    setTimeout(()=>{ if(pending[requestId]){ delete pending[requestId]; reject(new Error('timeout')); } }, 5000);
+  });
+}
+
+function setStatus(state, text){
+  const pillEl = document.getElementById('obsStatus');
+  pillEl.dataset.s = state;
+  pillEl.title = text;
+}
+function noteConn(kind, text){
+  const el = document.getElementById('connNote');
+  el.className = 'note show ' + kind;
+  el.textContent = text;
+}
+
+function connectOBS(){
+  if(ws && (ws.readyState===0 || ws.readyState===1)) return;
+  const url = document.getElementById('obsUrl').value.trim() || 'ws://localhost:4455';
+  config.obs.url = url;
+  config.obs.password = document.getElementById('obsPass').value;
+  saveConfig();
+  setStatus('connecting','Conectando…');
+  noteConn('info','Conectando a '+url+' …');
+  try{ ws = new WebSocket(url); } catch(e){ setStatus('error','URL inválida'); noteConn('err','La URL no es válida.'); return; }
+  ws.onmessage = onMessage;
+  ws.onerror = ()=>{ setStatus('error','Error de conexión'); noteConn('err','No se pudo conectar. Revisá que OBS esté abierto y el servidor WebSocket habilitado.'); SFX.err(); };
+  ws.onclose = ()=>{ const wasConnected=connected; connected=false; toggleBanner();
+    if(wasConnected){ setStatus('error','Desconectado'); noteConn('err','Se cerró la conexión con OBS.'); } };
+}
+function disconnectOBS(){ if(ws){ ws.close(); ws=null; } connected=false; setStatus('off','OBS desconectado'); toggleBanner(); }
+
+async function onMessage(ev){
+  let msg; try{ msg = JSON.parse(ev.data); }catch(e){ return; }
+  switch(msg.op){
+    case 0: { // Hello
+      const d = msg.d; const identify = { rpcVersion:d.rpcVersion, eventSubscriptions:SUBSCRIPTIONS };
+      if(d.authentication){
+        try{ identify.authentication = await computeAuth(config.obs.password||'', d.authentication.salt, d.authentication.challenge); }
+        catch(e){}
+      }
+      send({op:1, d:identify});
+      break;
+    }
+    case 2: { // Identified
+      connected = true; setStatus('ok','OBS conectado'); noteConn('ok','¡Conectado correctamente!'); SFX.ok();
+      toggleBanner(); onConnected();
+      break;
+    }
+    case 5: handleEvent(msg.d.eventType, msg.d.eventData); break;
+    case 7: { const d=msg.d, p=pending[d.requestId];
+      if(p){ delete pending[d.requestId]; d.requestStatus.result ? p.resolve(d.responseData||{}) : p.reject(d.requestStatus); } break; }
+  }
+}
+let lastSourceNames = []; // última lista de fuentes de OBS recibida, para repoblar los <select> al agregar canales
+
+async function onConnected(){
+  try{
+    const res = await request('GetInputList',{});
+    lastSourceNames = (res.inputs||[]).map(i=>i.inputName).sort((a,b)=>a.localeCompare(b,'es'));
+    renderChannelMapping();
+  }catch(e){}
+  for(const key of getChannelKeys()){
+    const src = config.sources[key];
+    if(!src) continue;
+    try{
+      const v = await request('GetInputVolume',{inputName:src});
+      const m = await request('GetInputMute',{inputName:src});
+      setChannelUI(key, Math.round((v.inputVolumeMul||0)*100), !!m.inputMuted);
+    }catch(e){}
+  }
+}
+
+function keyForSource(name){ return getChannelKeys().find(k=>config.sources[k] && config.sources[k]===name); }
+
+function handleEvent(type, data){
+  if(type==='InputVolumeChanged'){
+    const key = keyForSource(data.inputName);
+    if(key) setChannelUI(key, Math.round((data.inputVolumeMul||0)*100), channelState[key].mute);
+  } else if(type==='InputMuteStateChanged'){
+    const key = keyForSource(data.inputName);
+    if(key) setChannelUI(key, channelState[key].vol, !!data.inputMuted);
+  } else if(type==='InputVolumeMeters'){
+    for(const inp of (data.inputs||[])){
+      const key = keyForSource(inp.inputName);
+      if(!key) continue;
+      let peak = 0;
+      (inp.inputLevelsMul||[]).forEach(ch=>{ if(Array.isArray(ch)) ch.forEach(v=>{ if(typeof v==='number') peak=Math.max(peak,v); }); });
+      updateMeter(key, Math.min(1,peak));
+    }
+  }
+}
+
+/* ================= UI: mezclador ================= */
+const mixerEl = document.getElementById('mixer');
+const mainEl = document.querySelector('main');
+// El marco exterior (main) se ensancha solo según la cantidad de fuentes, para que las
+// tarjetas nunca tengan que achicarse ni cortarse. ~100px por tarjeta (con su separación),
+// nunca por debajo de los 520px originales, y con un tope para no verse absurdo en pantallas
+// enormes (ahí ya entra el scroll horizontal del mezclador como respaldo).
+function updateMixerWidth(){
+  const n = getChannels().length;
+  const ideal = Math.max(520, n*100 + 40);
+  mainEl.style.maxWidth = Math.min(ideal, 1100) + 'px';
+}
+function renderMixer(){
+  mixerEl.innerHTML = '';
+  updateMixerWidth();
+  getChannels().forEach(ch=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'channel'; wrap.style.setProperty('--accent', ch.accent);
+    wrap.innerHTML = `
+      <span class="icon">${ch.icon}</span>
+      <span class="name">${escapeHtml(ch.label)}</span>
+      <div class="stage">
+        <div class="meter"><div class="meter-fill" id="meter-${ch.key}"></div></div>
+        <input type="range" class="fader" id="fader-${ch.key}" min="0" max="100" value="0">
+      </div>
+      <span class="value" id="value-${ch.key}">0%</span>
+      <button class="mute-btn" id="mute-${ch.key}" data-key="${ch.key}">MUTE</button>
+    `;
+    mixerEl.appendChild(wrap);
+    wrap.querySelector('.fader').addEventListener('input', e=>onFaderInput(ch.key, e.target.value));
+    wrap.querySelector('.fader').addEventListener('change', ()=>onFaderChange(ch.key));
+    wrap.querySelector('.mute-btn').addEventListener('click', ()=>onToggleMute(ch.key));
+  });
+  // Si ya había valores en vivo (p. ej. al reconstruir tras agregar una fuente), los vuelve a pintar.
+  Object.keys(channelState).forEach(key=>{
+    if(document.getElementById('fader-'+key)) setChannelUI(key, channelState[key].vol, channelState[key].mute);
+  });
+}
+
+function setChannelUI(key, vol, mute){
+  vol = Math.max(0, Math.min(100, Math.round(vol)));
+  channelState[key] = {vol, mute};
+  const fader = document.getElementById('fader-'+key);
+  if(!fader) return;
+  if(document.activeElement !== fader) fader.value = vol;
+  document.getElementById('value-'+key).textContent = vol+'%';
+  const muteBtn = document.getElementById('mute-'+key);
+  muteBtn.classList.toggle('on', !!mute);
+  muteBtn.textContent = mute ? 'MUTEADO' : 'MUTE';
+}
+function updateMeter(key, level){
+  const el = document.getElementById('meter-'+key);
+  if(el) el.style.setProperty('--lvl', Math.max(0,Math.min(1,level)));
+}
+
+const sliderThrottles = {};
+function onFaderInput(key, val){
+  document.getElementById('value-'+key).textContent = val+'%';
+  channelState[key].vol = +val;
+  const src = config.sources[key];
+  if(!connected || !src) return;
+  clearTimeout(sliderThrottles[key]);
+  sliderThrottles[key] = setTimeout(()=>{
+    request('SetInputVolume', {inputName:src, inputVolumeMul: (+val)/100}).catch(()=>{});
+  }, 60);
+}
+function onFaderChange(key){ SFX.tick(); }
+async function onToggleMute(key){
+  const muted = !channelState[key].mute;
+  setChannelUI(key, channelState[key].vol, muted);
+  muted ? SFX.muteOn() : SFX.muteOff();
+  const src = config.sources[key];
+  if(connected && src){ try{ await request('SetInputMute', {inputName:src, inputMuted:muted}); }catch(e){} }
+}
+renderMixer();
+
+/* ================= Fuentes de audio: agregar / renombrar / eliminar ================= */
+function nextAccent(){ return EXTRA_ACCENTS[(config.customChannels||[]).length % EXTRA_ACCENTS.length]; }
+function createChannel(label){
+  label = label.trim().slice(0,18);
+  if(!label) return;
+  if((config.customChannels||[]).length >= MAX_CUSTOM_CHANNELS){
+    alert('Podés tener hasta '+MAX_CUSTOM_CHANNELS+' fuentes adicionales.');
+    return;
+  }
+  const key = slugifyChannelKey(label);
+  const accent = nextAccent();
+  config.customChannels = config.customChannels || [];
+  config.customChannels.push({key, label, accent});
+  config.sources[key] = '';
+  channelState[key] = {vol:0, mute:false};
+  config.profileList.forEach(pm=>{
+    if(!config.profiles[pm.key]) config.profiles[pm.key] = {};
+    config.profiles[pm.key][key] = {vol:50, mute:false};
+  });
+  saveConfig();
+  renderMixer();
+  renderChannelMapping();
+  renderProfileEditors();
+  toggleBanner();
+  setChannelUI(key, 50, false);
+}
+function deleteChannel(key){
+  const ch = (config.customChannels||[]).find(c=>c.key===key);
+  if(!ch) return; // solo se pueden borrar las fuentes agregadas por el usuario, no los 4 canales de base
+  if(!confirm(`¿Eliminar la fuente "${ch.label}"? Esta acción no se puede deshacer.`)) return;
+  config.customChannels = config.customChannels.filter(c=>c.key!==key);
+  delete config.sources[key];
+  delete channelState[key];
+  config.profileList.forEach(pm=>{ if(config.profiles[pm.key]) delete config.profiles[pm.key][key]; });
+  saveConfig();
+  renderMixer();
+  renderChannelMapping();
+  renderProfileEditors();
+  toggleBanner();
+}
+function renameChannel(key, newLabel){
+  newLabel = newLabel.trim().slice(0,18);
+  const custom = (config.customChannels||[]).find(c=>c.key===key);
+  if(custom){
+    if(newLabel) custom.label = newLabel;
+  } else {
+    const base = BASE_CHANNELS.find(c=>c.key===key);
+    config.labels = config.labels || {};
+    if(newLabel && base && newLabel !== base.label) config.labels[key] = newLabel;
+    else delete config.labels[key];
+  }
+  saveConfig();
+  renderMixer();
+  renderProfileEditors();
+  renderChannelMapping();
+}
+
+
+/* Anima un canal (fader + valor en pantalla + volumen real en OBS) desde su nivel actual
+   hasta el del perfil, en vez de saltar de golpe. El mute se aplica igual (no tiene sentido
+   "animarlo"), pero el volumen se interpola con una curva ease-out durante ~380ms, y los
+   pedidos a OBS se envían de a poco (no en cada frame) para no saturar el WebSocket. */
+function animateChannelTo(key, targetVol, targetMute, duration=380){
+  return new Promise(resolve=>{
+    const fader = document.getElementById('fader-'+key);
+    const src = config.sources[key];
+    const startVol = channelState[key] ? channelState[key].vol : targetVol;
+    if(!fader || startVol === targetVol){
+      setChannelUI(key, targetVol, targetMute);
+      if(connected && src){ request('SetInputMute',{inputName:src, inputMuted:targetMute}).catch(()=>{}); }
+      resolve();
+      return;
+    }
+    const t0 = performance.now();
+    let lastSentAt = 0, lastSentVal = startVol;
+    function tick(now){
+      const p = Math.min(1, (now - t0) / duration);
+      const eased = 1 - Math.pow(1 - p, 3); // ease-out cúbico: rápido al empezar, suave al llegar
+      const v = Math.round(startVol + (targetVol - startVol) * eased);
+      setChannelUI(key, v, targetMute);
+      if(connected && src && v !== lastSentVal && (now - lastSentAt) > 45){
+        lastSentAt = now; lastSentVal = v;
+        request('SetInputVolume', {inputName:src, inputVolumeMul: v/100}).catch(()=>{});
+      }
+      if(p < 1){ requestAnimationFrame(tick); return; }
+      setChannelUI(key, targetVol, targetMute);
+      if(connected && src){
+        request('SetInputVolume', {inputName:src, inputVolumeMul: targetVol/100}).catch(()=>{});
+        request('SetInputMute', {inputName:src, inputMuted: targetMute}).catch(()=>{});
+      }
+      resolve();
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+async function applyProfile(name){
+  config.activeProfile = name; saveConfig();
+  document.querySelectorAll('.profile-btn[data-profile]').forEach(b=>b.classList.toggle('active', b.dataset.profile===name));
+  SFX.profile();
+  const profile = config.profiles[name];
+  await Promise.all(getChannelKeys().map(key=>{
+    const chVal = profile[key] || {vol:50, mute:false};
+    return animateChannelTo(key, chVal.vol, chVal.mute);
+  }));
+}
+
+function slugifyProfileKey(label){
+  let base = label.toString().trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/(^-+|-+$)/g,'');
+  if(!base) base = 'perfil';
+  let key = base, i = 2;
+  while(config.profiles[key]){ key = base+'-'+i; i++; }
+  return key;
+}
+function createProfile(label){
+  label = label.trim();
+  if(!label) return;
+  const key = slugifyProfileKey(label);
+  config.profileList.push({key, label});
+  config.profiles[key] = {};
+  getChannelKeys().forEach(k=>{ config.profiles[key][k] = {vol:50, mute:false}; });
+  saveConfig();
+  renderProfileButtons();
+  renderProfileEditors();
+  applyProfile(key);
+}
+function deleteProfile(key){
+  if(config.profileList.length<=1){ alert('Necesitás al menos un perfil: no se puede borrar el último.'); return; }
+  const pm = config.profileList.find(p=>p.key===key);
+  if(!confirm(`¿Eliminar el perfil "${pm?pm.label:key}"? Esta acción no se puede deshacer.`)) return;
+  config.profileList = config.profileList.filter(p=>p.key!==key);
+  delete config.profiles[key];
+  if(config.activeProfile===key) config.activeProfile = config.profileList[0].key;
+  saveConfig();
+  renderProfileButtons();
+  renderProfileEditors();
+  applyProfile(config.activeProfile);
+}
+
+const profilesBar = document.getElementById('profilesBar');
+const addProfileBtn = document.getElementById('addProfileBtn');
+function renderProfileButtons(){
+  profilesBar.querySelectorAll('.profile-btn[data-profile]').forEach(b=>b.remove());
+  config.profileList.forEach(pm=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'profile-btn';
+    b.dataset.profile = pm.key;
+    b.textContent = pm.label;
+    b.classList.toggle('active', pm.key===config.activeProfile);
+    b.addEventListener('click', ()=>applyProfile(pm.key));
+    profilesBar.insertBefore(b, addProfileBtn);
+  });
+}
+function startAddProfile(){
+  if(document.getElementById('newProfileInput')) return;
+  SFX.click();
+  const input = document.createElement('input');
+  input.type = 'text'; input.id = 'newProfileInput'; input.className = 'profile-add-input';
+  input.placeholder = 'Nombre del perfil'; input.maxLength = 24;
+  profilesBar.insertBefore(input, addProfileBtn);
+  input.focus();
+  let done = false;
+  function finish(commit){
+    if(done) return; done = true;
+    const val = input.value;
+    input.remove();
+    if(commit && val.trim()) createProfile(val);
+  }
+  input.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); finish(true); }
+    else if(e.key==='Escape'){ e.preventDefault(); finish(false); }
+  });
+  input.addEventListener('blur', ()=>finish(true));
+}
+addProfileBtn.addEventListener('click', startAddProfile);
+
+/* ================= Ajustes: conexión, mapeo, perfiles editables ================= */
+const dlg = document.getElementById('settings');
+document.getElementById('openSettings').addEventListener('click', ()=>{ SFX.click(); dlg.showModal(); });
+document.getElementById('closeSettings').addEventListener('click', ()=>dlg.close());
+document.getElementById('doneSettings').addEventListener('click', ()=>dlg.close());
+document.getElementById('btnConnect').addEventListener('click', ()=>{ SFX.click(); connectOBS(); });
+document.getElementById('btnDisconnect').addEventListener('click', ()=>{ SFX.click(); disconnectOBS(); });
+
+/* Mostrar / ocultar la barra superior */
+const appEl = document.querySelector('.app');
+const reopenBar = document.getElementById('reopenBar');
+const hideBarBtn = document.getElementById('hideBar');
+function setBarHidden(hidden){
+  config.barHidden = hidden; saveConfig();
+  appEl.classList.toggle('hdr-collapsed', hidden);
+  const label = hidden ? 'Mostrar barra superior' : 'Ocultar barra superior';
+  hideBarBtn.title = label; reopenBar.title = label;
+  hideBarBtn.setAttribute('aria-expanded', String(!hidden));
+}
+hideBarBtn.addEventListener('click', ()=>{ SFX.click(); setBarHidden(!appEl.classList.contains('hdr-collapsed')); });
+reopenBar.addEventListener('click', ()=>{ SFX.click(); setBarHidden(false); });
+
+document.getElementById('obsUrl').value = config.obs.url;
+document.getElementById('obsPass').value = config.obs.password;
+document.getElementById('autoConnect').checked = !!config.autoConnect;
+document.getElementById('autoConnect').addEventListener('change', e=>{ config.autoConnect = e.target.checked; saveConfig(); });
+document.getElementById('soundsToggle').checked = !!config.soundsEnabled;
+document.getElementById('soundsToggle').addEventListener('change', e=>{ config.soundsEnabled = e.target.checked; saveConfig(); if(e.target.checked) SFX.click(); });
+
+// Fuentes de audio: fila por canal con ícono, nombre editable, <select> de OBS y borrar (si es agregada)
+const mappingEl = document.getElementById('channelMapping');
+function renderChannelMapping(){
+  mappingEl.innerHTML = '';
+  getChannels().forEach(ch=>{
+    const row = document.createElement('div');
+    row.className = 'chmap-row';
+    row.innerHTML = `
+      <span class="chmap-icon" style="color:${ch.accent}">${ch.icon}</span>
+      <input type="text" class="chmap-name" maxlength="18" value="${escapeHtml(ch.label)}" data-key="${ch.key}" aria-label="Nombre de la fuente">
+      <select class="chmap-select" data-key="${ch.key}"><option value="">— Ninguna —</option></select>
+      ${ch.custom ? `<button type="button" class="chmap-del" data-key="${ch.key}" title="Eliminar fuente" aria-label="Eliminar fuente">🗑️</button>` : '<span class="chmap-del-spacer"></span>'}
+    `;
+    mappingEl.appendChild(row);
+  });
+  mappingEl.querySelectorAll('.chmap-select').forEach(sel=>{
+    const key = sel.dataset.key;
+    sel.innerHTML = '<option value="">— Ninguna —</option>' + lastSourceNames.map(n=>`<option value="${n.replace(/"/g,'&quot;')}">${n}</option>`).join('');
+    sel.value = config.sources[key] || '';
+    sel.addEventListener('change', async e=>{
+      config.sources[key] = e.target.value; saveConfig(); toggleBanner();
+      if(connected && e.target.value){
+        try{
+          const v = await request('GetInputVolume',{inputName:e.target.value});
+          const m = await request('GetInputMute',{inputName:e.target.value});
+          setChannelUI(key, Math.round((v.inputVolumeMul||0)*100), !!m.inputMuted);
+        }catch(err){}
+      }
+    });
+  });
+  mappingEl.querySelectorAll('.chmap-name').forEach(inp=>{
+    inp.addEventListener('change', e=>renameChannel(e.target.dataset.key, e.target.value));
+    inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); e.target.blur(); } });
+  });
+  mappingEl.querySelectorAll('.chmap-del').forEach(btn=>{
+    btn.addEventListener('click', ()=>deleteChannel(btn.dataset.key));
+  });
+}
+renderChannelMapping();
+
+function startAddChannel(){
+  if(document.getElementById('newChannelInput')) return;
+  SFX.click();
+  const row = document.getElementById('addChannelRow');
+  const btn = document.getElementById('addChannelBtn');
+  const input = document.createElement('input');
+  input.type = 'text'; input.id = 'newChannelInput'; input.className = 'profile-add-input';
+  input.placeholder = 'Nombre de la fuente'; input.maxLength = 18;
+  row.insertBefore(input, btn);
+  input.focus();
+  let done = false;
+  function finish(commit){
+    if(done) return; done = true;
+    const val = input.value;
+    input.remove();
+    if(commit && val.trim()) createChannel(val);
+  }
+  input.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); finish(true); }
+    else if(e.key==='Escape'){ e.preventDefault(); finish(false); }
+  });
+  input.addEventListener('blur', ()=>finish(true));
+}
+document.getElementById('addChannelBtn').addEventListener('click', startAddChannel);
+
+// Editor de perfiles dentro de ajustes
+const editorsEl = document.getElementById('profileEditors');
+function renderProfileEditors(){
+  editorsEl.innerHTML = '';
+  config.profileList.forEach(pm=>{
+    const det = document.createElement('details');
+    const rowsHTML = getChannels().map(ch=>{
+      const pv = config.profiles[pm.key][ch.key] || {vol:50, mute:false};
+      return `
+        <div class="prof-row">
+          <span>${escapeHtml(ch.label)}</span>
+          <input type="range" min="0" max="100" value="${pv.vol}" data-profile="${pm.key}" data-key="${ch.key}" class="prof-vol">
+          <span class="prof-val" id="pv-${pm.key}-${ch.key}">${pv.vol}%</span>
+          <label class="switch mini-switch"><input type="checkbox" class="prof-mute" data-profile="${pm.key}" data-key="${ch.key}" ${pv.mute?'checked':''}><i></i></label>
+        </div>`;
+    }).join('');
+    det.innerHTML = `<summary><span>${escapeHtml(pm.label)}</span><button type="button" class="prof-del" data-profile="${pm.key}" title="Eliminar perfil" aria-label="Eliminar perfil">🗑️</button></summary><div class="prof-grid">${rowsHTML}</div>`;
+    editorsEl.appendChild(det);
+  });
+  editorsEl.querySelectorAll('.prof-del').forEach(btn=>{
+    btn.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); deleteProfile(btn.dataset.profile); });
+  });
+  editorsEl.querySelectorAll('.prof-vol').forEach(inp=>{
+    inp.addEventListener('input', e=>{
+      const {profile,key} = e.target.dataset;
+      config.profiles[profile][key].vol = +e.target.value;
+      document.getElementById(`pv-${profile}-${key}`).textContent = e.target.value+'%';
+      saveConfig();
+      if(config.activeProfile===profile) applyProfileSilently(profile);
+    });
+  });
+  editorsEl.querySelectorAll('.prof-mute').forEach(inp=>{
+    inp.addEventListener('change', e=>{
+      const {profile,key} = e.target.dataset;
+      config.profiles[profile][key].mute = e.target.checked;
+      saveConfig();
+      if(config.activeProfile===profile) applyProfileSilently(profile);
+    });
+  });
+}
+async function applyProfileSilently(name){
+  const profile = config.profiles[name];
+  await Promise.all(getChannelKeys().map(key=>{
+    const chVal = profile[key] || {vol:50, mute:false};
+    return animateChannelTo(key, chVal.vol, chVal.mute);
+  }));
+}
+renderProfileEditors();
+
+/* Exportar / importar / reset */
+document.getElementById('btnExport').addEventListener('click', ()=>{
+  const box = document.getElementById('configBox'); box.hidden = false;
+  box.value = JSON.stringify(config, null, 2);
+  box.select();
+  try{ navigator.clipboard.writeText(box.value); noteConn('ok','Configuración copiada al portapapeles.'); }catch(e){}
+});
+document.getElementById('btnImport').addEventListener('click', ()=>{
+  const box = document.getElementById('configBox');
+  if(box.hidden || !box.value.trim()){ box.hidden = false; box.focus(); return; }
+  try{
+    const parsed = JSON.parse(box.value);
+    config = normalizeConfig(parsed);
+    saveConfig();
+    channelState = {};
+    getChannelKeys().forEach(k=>{ channelState[k] = {vol:0, mute:false}; });
+    document.getElementById('obsUrl').value = config.obs.url;
+    document.getElementById('obsPass').value = config.obs.password;
+    document.getElementById('soundsToggle').checked = !!config.soundsEnabled;
+    renderMixer();
+    renderChannelMapping();
+    renderProfileButtons();
+    renderProfileEditors();
+    applyProfile(config.activeProfile);
+    noteConn('ok','Configuración importada.');
+  }catch(e){ noteConn('err','El JSON no es válido.'); }
+});
+document.getElementById('btnReset').addEventListener('click', ()=>{
+  if(!confirm('¿Restablecer TyraMix a los valores de fábrica? Esto borra tu conexión, mapeo y perfiles guardados.')) return;
+  localStorage.removeItem(STORE_KEY);
+  location.reload();
+});
+
+/* Banner de configuración inicial */
+function toggleBanner(){
+  const anyMapped = getChannelKeys().some(k=>config.sources[k]);
+  document.getElementById('setupBanner').classList.toggle('show', !connected || !anyMapped);
+}
+
+/* ================= Init ================= */
+(function init(){
+  renderProfileButtons();
+  applyProfile(config.activeProfile);
+  toggleBanner();
+  setBarHidden(!!config.barHidden);
+  if(config.autoConnect) connectOBS();
+})();
+</script>
+</body>
+</html>
