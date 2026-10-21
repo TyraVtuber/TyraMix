@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TyraMix · Control de audio</title>
+<link rel="icon" href="data:image/webp;base64,UklGRk4bAABXRUJQVlA4WAoAAAAQAAAAdAAAXwAAQUxQSMAMAAAB78agbSRH5yx/1N8LgIjI5Q8hxthKEoZKMMgWCmOfk4zj2Ac55sWAw7ZtJMln657B9l/xZJLdqyCi/xOgfsK0l+iJPJNNg/gFRUracfwDJOWGbAZQZkmuzQCzNNxKleIqbAD5mOMmwL5HkiXABg6ZGLCBgVWJpu3M9PlU8V6lIc1UH7TWWgdb58LWAqrkJ9kDUiUhkxogSdRtqVD/htynv4M//v8USc227fOtqu6ZdcgBYcMRYNHDOThOd3d3d3d3d3fXnIe7u7sROTw5CWFIFpIcB7KCzfZ0d9Xvj5ntnh3g/4iYAK5XHxf/6p/vCjU32+7z3zbgZqsOiy/r6CYj46Pf0cN0U5F4zg621aCbiBPlAhllyU3UOcoaj6MukW4ScgxqHIBSzU1Soo5sHjeQbgISG1ENZBXXoyZLOEdpsgYGJdKkydxEIVHSVgxAk+W4FT9JEiVqA5QT5uHfvgSHJkWOkvFWSJMiHF/IxslvJsNPhhwlGosYMCmewDee5CO93q//6GMJk+BESWM1MKiRJiGw+KO/1Psrlkk/9ujV37sLbZlEDdZAuM2GKyZQsPubvu/HEjyUZKL/RyRtkRwDWs7QskTaIudYun33blPi9KqSJPYraUskKho7jr3pC3CNqGyLPLZ/GktJq6ycwc7vCHD4VrQFzlmFGlE95r8/VNGyrqUtCOz4b5LFc8YZ7Azu8trFK7C0HzQu+brCaFxFpp5ugxaUcXwK7F+CKytF7TgDp6EqitUysXuJqPE4V5eIxnWiPptT1S2oaqfxONnSblJ5ue534TScRdWGdzZIdA940zjk6gFG46rGxYcecqSqBUXFWD36zS5pYAqrQZyFZQQgVZVxaBdq51xV0NioIpKLD0nUVQvK6NQusOuOk1ZXkrlrXbEMy2t0Z0ygukwsHQS1kKsrWsYaBK5GUNVYI8qqleDgEqmshclmuqwto/VllGOGKQ0Sty0R1UhuUNKyrpEAcyARa1qWpdRIkaXbSIMkAyMXy+t4lkmZY1iUkXwpmBo41SUt6xrEsAGCum5BVbsm3sJSThwghl2WWAY4ZSl4wwBUVYnDt6FN5MoKaxZr5GzEsDlR1c2MqpQ2Cdx2mFRVYqSFkOzU0FnJBUNDuFhHlg5hAo9zg5KWdQ2iuSDWjYCyEhjIOLREjFG2mZPOQuLMWSNDjDQ6U57FfUQ5pKqisRFrEG0lqog1oi4lzEX2LeK7HTFaZNjZM2Cce+sGmbG5WXLmD3RwSz5GWsYKifaCqqZlHd3DIXUOeHPJjNGGZWy89dzQpfdfJJNtBtWAxKHddF7osWYxgmOcgjo1M8KLjp7ec4jEoGJzM2VcfP8lgMEbH8aLpkpFhH2HWMNoaKQKxHgFVcQaYFzj0D6IRVIDkOfhN7ohx0m8b4Q0KB279oJr4jo1CBsPBnXHNXGwdxeuHEg09p6TjIAewVsjUFVg+rMOYRNzl95IEmOvzXjjJWebBDqHZBSVaG4+0GOkDWVtTKlI6WMv2E8YVfuXfK/bPp3GpWrmVn3vS3w9KrD/BaRUJFkzWTZkQ4lTKwRTM5AGlVg6hGkIsevD6prGhGbU7yGGZRxaQtVAoqW3wMop0pBp/XTMsTagqoAde4luCNyrycTYMs5eYKSL7N0BRSXamiePp9dlQ3hO+vlFM7UxpSIZh2fRkOdfyWRjMmUsJz8kZg9jqUiyNjK3OOdO4usRcOpN5cLuENUCpEFtHNjDcOBXCJ5x+cCDaIg9B7B6INHaQpgp3nWKTY0vfuIXlWSZtQJVhbH3ICYC30YIaVxZ4Awg4+BerKhEe8syPvhFT/xi/KjI1Byr5wgdWStTLCLb9xK94zPwOeMVmecMyUX2bicWUdbK1AmcO8bcFI0DH38Yl8vUAvAuRo4skLHrKrlpLFjO1QfxLBwhRudpLVPuePjjBJoLmF2M5MHa0enkxoGnENwZMtlYTBlnLoRq7wEs73RobyEnLs4SUDMgTP/kEZFl1s4qvNhzgPgwwTFeF/jXyIE9yFNZO8sydOTLphmreIpP+FzWBup+dMwf5AQ+2FgseH6Og/O42K9pbco9yT+lH8cT3Hd8ee1QR6Y2jqJQZOeahWxMWbDv20lUUeDayNQRrv7y71AYj2Pp97l2GfJgbUBVP4lfMpehMYjM2Vei1K9Eaws5XL7G7y/Vbjzo9Efoni+NkJm1MVm/FHPuUWwMRsShsm+yNmZZwMoLXT6CGHPg/WSr9aAi5LSXqzaAddMYZFPARuVE+zxQDeq5jPcTxuW5B3ftaigHKHfWBlPs16TZOIY4O0/VjzLamsvFoAxXZh334Mcl7n6U+qIUCyP3yEbZCJAGBYthDGHRXT4r0dKEz7EiShe6PHo3Gheev+nZaiWsqMg68zKNkI0A1dfSpbJVvS31KxnNZZrvZFSFoWrVc7zvGXvgW3tpY82bVA7wszNiU40yWVGaWsSd04VktNXMrGdQSubXNozjhPE59nw0aZUkFAvcbDfYCNHQVRvRNbLt7qwkWlrozjqKKJRYFf3348aH48XTMc51LCEbVHifYbRV6pdNbKo6L6OlkXlPNTCRrDMXo7v/rGMr9OUv6/V6XlUtmQ1AuVqBc0006HtaKxcMSslSNj8dMvyX25Yg/Nc9o4f3VEmqCyB3pjYtTbSUuRwoamcpzM1m8O7/e7MZW+uAL/aH5J1VCYoasmBb0t5CBnUByc3O5thrn/nKiNhqefHgSjqQBZdkVAMImdnEmGUBBhWmmbkuGy961luQNybR5/C437iz15ubgroAl2lilDkoamNqbpqV33gc5J7JdDzuP47C7p96G7MLHeKgRrlMEyBTLupBVGdhljNPfyYc/Y/H4SZD3NL7BdeFbU+/j7ltHTYGkHuzrYs+h7Kgs22O+57+3Efpul/o3YImxd/zxwQF1p//9OPMb+/EgREybZlNBayou9vnOf70568TBoE/vsdPCuL1/4sHBeCnP7y4VC1f8LfckrRFSvM5F85lt8/f+RVAEHj+9/WICfU8/bUIQN795UecpzL8gK02t1IxHaqrrOC8AMRrn46flMBffNAjAK+rh/MYfe5D7bYKV15jdiFdTl/5efIAwn/wLwiT8wu9W0Y5ulIsr1r3sTuSbZHFWxcw88UV/hU36pbeL0zSBXaO8Dq2P0/4FA1lIaQtSCFkwmKqsPzkMXnAsZMLTKxnhcVR/LX3tXMYzsh2TNvY4sKODHMYcpXr/TVDnkVWsMk5x84hx8F7Q2EyY99uRD4/FZLGoKTbduWI3fswlKoH7j2Ig8BOzjGxjgvsBAj8ZW9mHjPbfXBq9ROG6HbM2tXTe+YN+8Tq1MHdJmPhvt5fEkZdwCZFrNaLApy++nV0ZzspJbt08mJZAvmUMzWSuakcKMuLJ72lFDvTnd7rvloOghbr1UnqX1w0B4j5t0UyJy2snncqCwRTWWpk2RSIopQ7v2NBekxG/LV5BOS2eLHP5Do+fnC+DALP5XfdhXinoxOSS0WN0ZlNaIRI3Q5GXSSXQn5Y7yTjrneBBwXmD34cZxMj7t3/gi+szYECx99yeeVTvulR8hxLM4E+R24lCVDUoqdPmElGJ2f5mz5l5fJbjhMEDr7wBfvvRUyO5n6m1/vFjAA4WApi/q96vQ47jsyeP7Fe0e2YCet0qdbvPz97ZIc6OSfmUVgCBwSyX+z1fmZOEzR89I7ei5+KcyAPePjB+5k5ss3W1t2gIJ9yKU3lFAOtr9m2w9PU/38ZD3iBczz1xb07jjLhCvA99/Z+CALgBPJ8zjJ2N064up+Ymrqd1K8dctxtLD+AF8gBAX6od+/3QNBkgRN7/6F3xz68GB04cer3j61hIDYKpm8vNhAYa8d+/9QJZIyUZ98dvX/YixzXYYCvPX7iW8GPwgPyBgaqNuJKJTCwXIBntIdvPXH8ayFwfTrPtj/o/eN2gkYgybGp7HJPjJaTxEgFtv9j7w+24R3XrYcveONdXwl+xKYaMhRtSODY3MNX3vXGLwDP9SxP+KWTf5QTGiEwQBiIxoH8j07+UsCL69zDsRe/6XOQa2CMVGTYGjjxOW968THwXP8K8CN3/QqEzUBDcTsgGgb4lbt+BIK4ITpx4H9feBTnNgOROocRDZ3j6Av/9wBy3DADfNcbfgJCAyDN0NTBT7zhuyBwI3WeXX//34fw2kzi3dpMxqH//vtdeMcNNsA3PPt7wG+Cu+8pbOoin/Hsb4DAjVeehd/5k9vxGmH0/95GCG5//IkFvLghe/jSv/xacEPgxbAiT8uOX8Jzo5Zn+sd+aiejLY5g557ee/DiBu7h037qs0lDIxNH+FAfjBu7J/vaXQtohFjYdfaD+MgN38EDIANM8ECFMflWUDggaA4AAHA5AJ0BKnUAYAA+PRiIQyIhoRj73nggA8S2BtsCw0/b+m9RRjvtX4W/kl8mNTfp39L/Mf7wf5nok5u8nzkL/T/cb8M/8B+QHyA+7T3Av0i/wX9t633mA/Y39mfdg/0X7R+5n+/f3H/ee4L/XP7p/6vW19hH9r/YA/ln+F9WH/R/+f/CfA3+zn/m/2fwD/z7+yf+L8//kA9AD0AP3/7j7+ifhv+l/lj/gvDfx4e7vZj9zuZg0i/Y8I/AC9f/6PgiQAfWPiS0svyr2AP0N6JH/T5XP0H/PewN/Mf61/zv7f7X3sZ/cz2Qf2AVxqRZp6+NzfFCK56+uhapX1ID6igLIi+xX7uNufprWhzE8/Y9fLH329D3UZROrET+wiwo5FWQ1DwdtgIDDIKa86AOD6ruG8puDcP8Clf5AcOeiHfFhuh7CdVVfbg0O0rOO6tWTirUWfeahd5WB83zv+ylGzrScOXoRO3DWL5o00ak2HKWiXHvbYJV9W2y4vawwXLQyy+KT7+ygL05QRdsUaCzGtV9cb+5Sy7Bxq8QNA4OquEoHCOhZqtGNS6BJrtBQjnHpVrSSuZKjOWSZshWy5qRSpy9PwuGzL/XA6Vob1Jozo27EMD/vmN0AAD+6DejEQoYsJBToMu4bdGDPoOn4Pdy5y8biDz+hzOgSIBpJD189NFX5LzjG8+kFunOM20zBnm4+Jtzyq3xJU/aro57tp4YNZoe2qYV0LvvwoODU9vOIbEF59lptWoYrNH7jgvCMGo4xCLOoMDyC5BpPhEgpPudwZevVWLQy0fNhLPTaYlXOjup47caAMPo9j/a0kbj0iH2nEDMG+WAlB0zVvQYDhiiQ23SruWSXCfC8P9U3qCrmHITbiTgPBf6D4MAwoA28+9MM0VKhYB90TVY+7KFwkQD4faHhpLGXPsv8+e/4H7Svv3IxJqhLhH+2VoQuU5SvyTZCVls5AZBm6+OsbG8f8f0Bk/etRhZRXtAZLEpUfDZQaNOc4J2AGdgg6FGmj+gBlmUOprCM2sKrrNTyOzvDiOlqeVasVudczsLy4YuGuV9l0JZ+i5au8jhEMdDGhzrjAfdf+jzrhRmSyQb/owv3Gpe0e9NLlVo515DspWe9sHefkGsXt3lYbQLIxP1aSMzeDvatKIc81sKRE6aanq9liVhVu4xhYAliHJGia2/jIiq7jgwNuK7ibUp5yRTw2KXUjbZhcz/g/lIfuD22xtR2GHHbwIfpMiG85nBdnAIbiDanWLS4HBZASZH59yunZ4SKb9s+b4O9C7lTytqrKfg/9rPR0UzHSoIgLxoUJKdL2HXrIRRY4bughCf9aALtfhkCnhbTB7DF56u+zR0Xch+GlqcSX50+Eh5RMUNlY7H04HLKo3VRGafIhu+CVoPub3I8Sdc8Pe7Ad0xRrbdfDdILYl9uvikKxel/ETmzUKsxkP+y3zmNinj6qsuRjvqDsat//OltUYfIHoC9ExBa6qadSOiI7V+U8SCS05VK/LXxXtJj95dEmBDOKqnAotw9OveXn8zg8Nr5h6QVQAoXt0uBsQ9fEa8r93UlNEpn9mlXWiqVwukYQducpcVKPBQLflevQueuIMx/kjg2BvsJwTseSbzWer/6D5VX3SH1DUeQZY0F6G0REX+utZ5nsV7vqZV1q8+be/pgz7iDj49JQMa0iGKG+RV+DeAgZ1V1EXqCxr7QN2Allsn/qIJ8f0TkMeVzJvFkA7JHeEu+3U1oV7lfvSvLXxJzP2wmb7prP5x5pE/jNp+UWBpYyp1UXuZY2M5FuFcj0L0We8bR+br6b4/4Nwo0+EsMK3n9rAjMTQZn1jPYDHcqD0ev1KKR1l4ZnRuJZ0i7hcubmygPFHbup/5UygcYgV4HdSF//35P/7Uav/IsttB/4cqzeBV+jOUBZYppy7C2XKfoAFT+AI0YM1YlEKnwLdyaUrk5vM8mR4y5P8N3HDHsIVuYORrT3yy3uegb7DRQWkv4yejna2OvgEoc9mXz/NHnkLt+OoS6ESfW4A+c8O8pnkEAGo1LbWEDujn41qRP7zWvxcnrcB6IYiSpsrsu22uAeQoDH/ngjSz9QynESfa68r/UXAJaS0HsXplOTunpfbFvdV7ghhtMRc3y0XtGd2StMzAh+bZajH1X8FzWXFNpAaVjqhQEGX/aXyglkjYeTfKOHnX/0QL3shASbOEUDxslC/wEcVwOw57g+CaUzmcwa/e7jAOi3f6VmuKRAtuQGGOC71UtfZnwXYxM/U2095k2eHELn9FbixyC4LIPgvH09zVGDhk/j29WpzHagCW9poA/SeyzcqswPswHHMK+f7q4dht4lMgTLrC+Pf7WDzxP/pWbIP1OqFpY8hmbj+ZO8i8o03pmnzLxflIP0/v/Mhpow3KdiOu0BNDUcIlqJOFbdZ76PKqoGhqku+abnzNwE1ETZx2VsyS1QXV0uHeqqk9AQ5/rECn0QF8HzgcCqPGikHl5cWyoPV5t5809GeQBXKeMu7WKj8JsnjJaIinSskaYJOOH2IhMuWxmPNE/wWovHPfExR/GTDvr9XAd0Ql5tWliYaOK9NXYlZPRgKqg/C8CY3YrWuCIYxbKLSo3dnTlbUoTwfx+DTu4mj/OOYgxH5NFV+e3CFLqVhzJXqdD/SaMXLYNMKh2a94pq+0g0OLQOBI7NxA1wTpDlQkJ1HYue2AVzMXDMm+MZN1I7dQ5Gyw/+ouJtcGbfwIFqMnSjAG/uzv62ryLvZYZOJZ/vLsBwV8e1aNMSMVtEeJOWIcMcg1XgFAE/8byg5DOX+dIhI4xIBh3OBhsR58dbe6zXbhmm61qAel1oc/wn3982wzCOTWVq1/v5OHJJiD/uXCU4PlKW5LE0BDVAAEr7A/u7f4wQE/+4dwMp/LXvjDNtC/V8aCrMKDa15cYSc8xtJ3GU9VmJkdMli7agwTOjD5jghM8G9hAfnfqQqv7hTjA3YMOXOkj3BoY8fH9UqLhK+wG/inwVpIK4KnLeVX2Rw7IdxUVetOjTmeyLA558yDHfubxxJ4rGSYhxwEN1fWX6gvumTw4+33j9j1LAQek3UMYgt8/w60ctJSm1xICmybvhfRxgB1nEsaqL9L27X5GlO0nayHWffB3LfkPBChm8GwcoRME86Jj6KS+dF5WN7tRDYbyzKYhUH+OuZQZKI6elXgyS+n2nRBKfOQVQxTG6SI+uW5uSe2fhVChVJBaMhdHGBgmAeXo2Wh1ROcuFIH/mhK34kiMr3pgPOnWzaMytD4hqncr/7q+VrdTFPaIX4IGNFKul/L9dDHz1+IWmfLmTU2dhcElypvhR+rhG+sjYj8tx7LG0WxmS4h2kFhuanH6o1oCWHuK1nOyiP7ah/3a+2QjqQr+xeTAT7Kf/R1l8sFmg32W/lwhjXQ3w3f/OMcpoa5HfxWqGE6jwhhPSmEBkGrRwSbNqUYQgv/6UsAA/f7I1uVAhr9mDFNB4dmXn3NlMG38OWIiGJFbFQ4SHevlcJJOCfQEkGOthM7Yk/40G799Tp25ahGvXAIFU7/LsSnF9Oecv/ypvedJx8omOmQEP4pWJbemFMU6jhejnieOkljGqwhsHp1Jlidrt3xIaina7eZF0+F7R1zxwhYCdicMtKphk09H16QbeH2YGFCFx2cdR7O1BmtT9Pb1TP93ekb+2LcYgTf0gRWDeuNk7H/ZFPbugQHS8s0U1gpIwKzOtKH4JD5rSreB5RyMQ7ETXIEYY/yGwqjzfrOtvwHzUmfhZ/drV2qpxVRkZ0DlZApIQzVWj3Sy99jRGK35ODvnrabVXk0Mekl5dAdBzMMsHjsUXOQKOm2ovTxJo2UgvbNm+vy9fxq87fK1ZeKkEkFM6fm6xjMZiY5B3FxH35Pwlsg18H6h8o06v0OpRrxhTd7WeBsKSxpjE4Ww/jorFCG4WT1geH7x2ecjWaO3Mr4OGfY/7p6azNbWbgNQRAoxP3gkyAXYZgBnttWkOa2ILHOR5OT5QeUaUeJgOG10dsY5KrWjOhwzL9vHNjkgmM975JWlTVM5qHIbMOaIAZPFB6fSM+oE3bLOWBcnBDxFT3yfMasOhVtSHxhu0Ibtyi4oH0X8OH9WfEkYErOVS6HumT31cD/AJSgoGSCo70BxzXe4IH0H/7233xdKZfitO1wv4Ti/XIkmYn2996FsfUq1HqPaHlGU+RqgAu8P0V0D5c9hgm+0XKimeg0qaYr2EOdNA6r0DqUMkZG/6MUl/IXaYSeR9mooz/1Q4gZQknmmQespxMXix2J5rGzudaHgQ/8aX//uSnIP/+r5+yTe6EpPMx+H5jy6fgjZz7FicN6Fn6gErRF/6s/HRvm1ANOeVNuZzAAGgFIQ+sVxWegb9SMc/JpUQQFl80czqrWgpXPJX8GVNMTIZE8bfqax75JruBwkcN3DnbAHhr+ZZic/7vVerE4ZhE7mI+YK6JHr/v+mKqLreFOcSFk8AnqNxZu9DAFAkKU64/jtj3ZSQ1DXAVmltwF/+TQUMfo/tbO/oTRehjxucjCtrI9Gtu3Dj3Z2meWZgimb819MN7QkKLXBjU8tu4hoqxK198pbgwmdm4Db5qDQXiz6B4BRp36QcIhYz2gDT7FaIh6X0SureTRRKo2k41vSGRlEXqEgFPR6NgJBtWQOkcnIt/+PO8fQoezr/xMU7KLX7qyX0SZ54c654lb1vyYFG37p8OHEGaoki8Ondt8BIDMrbvPChp+7L74r8czTlPMQs5XY1YAURxhmrI9EYn83YfJ4sDdW2jm3f9TwN32Q0UpaF4DAhB3PdnWoiX5DmVYtDgef+KBvbMH3FfOxHqDuQqIJnEFWtIw2o56lpg1c+9GBKAq3jJ4W6QpqtgB0pS6BtjmgCtWACp8JF/+zqXJueHWHowIkMp72fDLVX3ITsUKieoNoEi9E++uz/0CQAAAAAA=">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#090614; --bg2:#0f0a20; --panel:#150e2b; --panel2:#1e1440; --line:#33226e;
+  --purple:#8b5cf6; --purple-deep:#4c1d95; --pink:#ff1fd6; --pink-soft:#ff8cec; --cyan:#22e6ea;
+  --text:#ece6f7; --muted:#9a8bb8; --tw:#a970ff; --kick:#53fc18; --yt:#ff3d3d;
+  --ok:#5dffb1; --warn:#ffc857; --err:#ff4d6d;
+  --pink-rgb:255,31,214; --purple-rgb:139,92,246; --cyan-rgb:34,230,234;
+  --bg-rgb:9,6,20; --panel-rgb:21,14,43; --panel2-rgb:30,20,64; --bg2-rgb:15,10,32;
+  --hdr1-rgb:28,15,50; --hdr2-rgb:16,8,28;
+  --brand-text:#8ff5ff; --faint:#6d5e8a; --on-accent:#0c0418; --crest-filter:none;
+  --glow:0 0 6px rgba(var(--pink-rgb),.65),0 0 20px rgba(var(--pink-rgb),.3);
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --display:'Orbitron','Segoe UI',system-ui,sans-serif;
+  --fs:clamp(13px,1.6vw,15.5px);
+}
+/* cada tema define la paleta completa; todo el diseño sale de estas variables */
+:root[data-theme=midnight]{
+  --bg:#060a14; --bg2:#0b1222; --panel:#0e182c; --panel2:#142139; --line:#223658;
+  --purple:#4f7dff; --purple-deep:#1c3577; --pink:#38bdf8; --pink-soft:#a8e3ff; --cyan:#818cf8;
+  --text:#e4ecfa; --muted:#8a9bbb; --faint:#56688a; --brand-text:#bfe9ff;
+  --pink-rgb:56,189,248; --purple-rgb:79,125,255; --cyan-rgb:129,140,248;
+  --bg-rgb:6,10,20; --panel-rgb:14,24,44; --panel2-rgb:20,33,57; --bg2-rgb:11,18,34;
+  --hdr1-rgb:15,26,48; --hdr2-rgb:8,14,28; --on-accent:#04121f; --crest-filter:hue-rotate(25deg) saturate(1.1);
+}
+:root[data-theme=sakura]{
+  --bg:#130a10; --bg2:#1c0f18; --panel:#251420; --panel2:#30192a; --line:#512a44;
+  --purple:#d36fae; --purple-deep:#6e2453; --pink:#ff8fbf; --pink-soft:#ffd3e4; --cyan:#ffb9a1;
+  --text:#fbeaf1; --muted:#c79cb1; --faint:#8a6377; --brand-text:#ffd3e4;
+  --pink-rgb:255,143,191; --purple-rgb:211,111,174; --cyan-rgb:255,185,161;
+  --bg-rgb:19,10,16; --panel-rgb:37,20,32; --panel2-rgb:48,25,42; --bg2-rgb:28,15,24;
+  --hdr1-rgb:42,21,36; --hdr2-rgb:22,11,19; --on-accent:#2a0d1c; --crest-filter:hue-rotate(150deg) saturate(.85) brightness(1.08);
+}
+:root[data-theme=matrix]{
+  --bg:#030907; --bg2:#06110c; --panel:#0a1912; --panel2:#0f2419; --line:#1c4630;
+  --purple:#16a34a; --purple-deep:#0f4426; --pink:#3ee07a; --pink-soft:#b7f5cb; --cyan:#a3e635;
+  --text:#dcfbe6; --muted:#83b592; --faint:#4c7a5b; --brand-text:#b7f5cb;
+  --pink-rgb:62,224,122; --purple-rgb:22,163,74; --cyan-rgb:163,230,53;
+  --bg-rgb:3,9,7; --panel-rgb:10,25,18; --panel2-rgb:15,36,25; --bg2-rgb:6,17,12;
+  --hdr1-rgb:12,30,20; --hdr2-rgb:5,14,10; --on-accent:#02140a; --crest-filter:hue-rotate(-65deg) saturate(1.05);
+}
+:root[data-theme=ember]{
+  --bg:#110904; --bg2:#1a0e07; --panel:#23130a; --panel2:#2e190d; --line:#5a3117;
+  --purple:#ea580c; --purple-deep:#6c2a0b; --pink:#fbbf24; --pink-soft:#fde7a6; --cyan:#fb923c;
+  --text:#fdf1e4; --muted:#c8a487; --faint:#8a6a50; --brand-text:#fde7a6;
+  --pink-rgb:251,191,36; --purple-rgb:234,88,12; --cyan-rgb:251,146,60;
+  --bg-rgb:17,9,4; --panel-rgb:35,19,10; --panel2-rgb:46,25,13; --bg2-rgb:26,14,7;
+  --hdr1-rgb:40,22,11; --hdr2-rgb:20,11,5; --on-accent:#1c0c02; --crest-filter:hue-rotate(195deg) saturate(1.2) brightness(1.05);
+}
+:root[data-theme=graphite]{
+  --bg:#0a0a0c; --bg2:#111114; --panel:#17171b; --panel2:#1f1f24; --line:#34343c;
+  --purple:#a1a1aa; --purple-deep:#3f3f46; --pink:#f4f4f5; --pink-soft:#ffffff; --cyan:#cfd2d8;
+  --text:#ececee; --muted:#9a9aa3; --faint:#62626b; --brand-text:#ffffff;
+  --pink-rgb:244,244,245; --purple-rgb:161,161,170; --cyan-rgb:207,210,216;
+  --bg-rgb:10,10,12; --panel-rgb:23,23,27; --panel2-rgb:31,31,36; --bg2-rgb:17,17,20;
+  --hdr1-rgb:26,26,30; --hdr2-rgb:12,12,14; --on-accent:#0a0a0c; --crest-filter:grayscale(1) brightness(1.35);
+  --glow:0 0 6px rgba(255,255,255,.35),0 0 18px rgba(255,255,255,.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;scrollbar-width:none;background:var(--bg)}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
+body{
+  font-family:var(--font);color:var(--text);font-size:clamp(12px,1.6vw,14.5px);overflow-x:hidden;
+  background:
+    radial-gradient(900px 500px at 85% -10%,rgba(var(--purple-rgb),.22),transparent 60%),
+    radial-gradient(700px 500px at -10% 110%,rgba(var(--pink-rgb),.13),transparent 60%),
+    radial-gradient(600px 400px at 110% 105%,rgba(var(--cyan-rgb),.08),transparent 60%),
+    var(--bg);
+}
+.app{min-height:100dvh;display:flex;flex-direction:column}
+button{font-family:inherit}
+
+/* ---------- Barra superior ---------- */
+header{display:flex;align-items:center;gap:8px;padding:clamp(7px,2vh,10px) 12px;
+  background:linear-gradient(180deg,rgba(var(--hdr1-rgb),.95),rgba(var(--hdr2-rgb),.85));
+  border-bottom:1px solid var(--line);position:relative;z-index:3;max-height:200px;overflow:hidden;
+  transition:max-height .3s ease,opacity .22s ease,padding .3s ease,border-color .3s ease}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),var(--purple),transparent);opacity:.85}
+.app.hdr-collapsed header{max-height:0;padding-top:0;padding-bottom:0;opacity:0;border-bottom-color:transparent;pointer-events:none}
+#hideBar svg{width:13px;height:13px;transition:.2s}
+.app.hdr-collapsed #hideBar svg{transform:rotate(180deg)}
+.hdr-peek{position:fixed;top:0;left:50%;transform:translate(-50%,-100%);z-index:30;display:flex;align-items:center;gap:6px;cursor:pointer;
+  background:var(--panel2);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;color:var(--muted);
+  padding:5px 16px 6px;font:600 .74em var(--font);letter-spacing:.04em;box-shadow:0 6px 16px rgba(0,0,0,.4);
+  transition:transform .28s ease,color .18s,border-color .18s}
+.app.hdr-collapsed .hdr-peek{transform:translate(-50%,0)}
+.hdr-peek:hover{color:var(--text);border-color:var(--cyan)}
+.hdr-peek svg{width:11px;height:11px}
+.brand{display:flex;align-items:center;gap:9px;margin-right:auto;min-width:0}
+.crest{height:34px;width:auto;flex:none;filter:var(--crest-filter) drop-shadow(0 0 7px rgba(var(--cyan-rgb),.4));transition:filter .3s}
+.brand h1{font:800 clamp(13px,2.2vw,17px) var(--display);letter-spacing:.14em;color:var(--brand-text);text-shadow:0 0 12px rgba(var(--cyan-rgb),.4);white-space:nowrap}
+.brand h1 b{color:var(--pink);text-shadow:var(--glow)}
+.pill{display:inline-flex;align-items:center;gap:7px;flex:none;color:var(--muted);background:var(--panel2);border:1px solid var(--line);
+  border-radius:999px;padding:5px 11px;font:600 .76em var(--font);cursor:pointer;transition:.18s}
+.pill:hover{border-color:var(--cyan)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--faint);box-shadow:0 0 0 2px rgba(255,255,255,.04);flex:none}
+[data-s=ok] .dot{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+[data-s=connecting] .dot{background:var(--warn);animation:pulse 1s infinite}
+[data-s=error] .dot{background:var(--err);box-shadow:0 0 8px var(--err)}
+[data-s=ok]{color:var(--text)}
+@keyframes pulse{50%{opacity:.35}}
+.iconbtn{cursor:pointer;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:10px;min-height:29px;
+  padding:0 10px;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:5px;font:600 .82em var(--font);flex:none}
+.iconbtn:hover{border-color:var(--cyan);box-shadow:0 0 12px rgba(var(--cyan-rgb),.3)}
+
+/* ---------- Contenido ---------- */
+main{flex:1;padding:clamp(10px,3vh,16px) 10px clamp(14px,3vh,20px);display:flex;flex-direction:column;
+  gap:clamp(10px,2.5vh,16px);max-width:540px;margin:0 auto;width:100%;transition:max-width .25s ease}
+.banner{font-size:.8em;color:var(--muted);background:rgba(var(--panel-rgb),.8);border:1px solid var(--line);border-left:3px solid var(--warn);
+  border-radius:10px;padding:10px 12px;line-height:1.5;display:none;align-items:center;gap:10px}
+.banner.show{display:flex}
+.banner b{color:var(--text)}
+.banner button{margin-left:auto;flex:none}
+
+/* Mezclador: una fila de canales; si no entran, se desliza en horizontal */
+.mixer{display:flex;gap:clamp(6px,2vw,10px);background:rgba(var(--panel-rgb),.85);border:1px solid var(--line);border-radius:16px;
+  padding:clamp(10px,2.6vh,16px) clamp(6px,2vw,10px) clamp(8px,2vh,14px);overflow-x:auto;scrollbar-width:none}
+.mixer::-webkit-scrollbar{display:none}
+.channel{flex:1 1 clamp(58px,20vw,94px);min-width:58px;display:flex;flex-direction:column;align-items:center;gap:clamp(5px,1.1vh,8px);
+  padding:clamp(8px,1.4vh,10px) 6px;border:1px solid var(--line);border-radius:14px;position:relative;
+  background:linear-gradient(180deg,var(--panel2),rgba(var(--panel-rgb),.92));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 4px 10px rgba(0,0,0,.25);transition:opacity .2s,border-color .2s}
+.channel::before{content:"";position:absolute;left:10px;right:10px;top:0;height:2px;border-radius:2px;background:var(--accent);opacity:.75;box-shadow:0 0 8px var(--accent)}
+.channel.unmapped{opacity:.55}
+.channel.unmapped .value{color:var(--faint)}
+.channel .icon{width:clamp(18px,4.4vh,24px);height:clamp(18px,4.4vh,24px);color:var(--accent);flex:none;filter:drop-shadow(0 0 4px var(--accent))}
+.channel .icon svg{display:block;width:100%;height:100%}
+.channel .name{font:700 .64em var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.stage{position:relative;width:40px;height:clamp(70px,24vh,150px);display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}
+.meter{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:13px;height:100%;border-radius:4px;overflow:hidden;z-index:1;
+  background:linear-gradient(90deg,rgba(255,255,255,.05),transparent 30%),linear-gradient(180deg,rgba(0,0,0,.55),rgba(var(--bg-rgb),.9));
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.05),inset 0 2px 5px rgba(0,0,0,.75)}
+/* el medidor pinta la escala completa y una máscara tapa lo que no suena: así los colores no se estiran */
+.meter-fill{position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.16),transparent 40%),
+    repeating-linear-gradient(0deg,rgba(5,3,9,.45) 0,rgba(5,3,9,.45) 2px,transparent 2px,transparent 6px),
+    linear-gradient(0deg,var(--ok) 0%,var(--ok) 60%,var(--warn) 80%,var(--err) 93%,var(--err) 100%);
+  clip-path:inset(calc((1 - var(--lvl,0)) * 100%) 0 0 0)}
+.channel.muted .meter-fill{filter:grayscale(1) brightness(.6)}
+.meter-peak{position:absolute;left:0;right:0;height:2px;bottom:calc(var(--pk,0) * 100%);background:#fff;opacity:calc(var(--pk,0) * 4);box-shadow:0 0 4px #fff}
+input[type=range].fader{position:absolute;top:50%;left:50%;width:calc(clamp(70px,24vh,150px) - 8px);height:30px;
+  transform:translate(-50%,-50%) rotate(-90deg);-webkit-appearance:none;appearance:none;background:transparent;outline:none;cursor:grab;margin:0;z-index:2}
+input[type=range].fader:active{cursor:grabbing}
+input[type=range].fader::-webkit-slider-runnable-track{height:6px;border-radius:4px;background:linear-gradient(90deg,rgba(0,0,0,.6),var(--line));box-shadow:inset 0 1px 3px rgba(0,0,0,.75)}
+input[type=range].fader::-moz-range-track{height:6px;border-radius:4px;background:linear-gradient(90deg,rgba(0,0,0,.6),var(--line))}
+input[type=range].fader::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:15px;border-radius:4px;margin-top:-4.5px;border:0;cursor:grab;
+  background:linear-gradient(180deg,var(--panel2),var(--panel) 60%,var(--bg));
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2px var(--accent),0 0 10px 1px var(--accent),inset 0 1px 0 rgba(255,255,255,.2)}
+input[type=range].fader::-moz-range-thumb{width:28px;height:15px;border-radius:4px;border:0;cursor:grab;
+  background:linear-gradient(180deg,var(--panel2),var(--panel) 60%,var(--bg));
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2px var(--accent),0 0 10px 1px var(--accent)}
+input[type=range].fader:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px #fff,0 0 12px 2px var(--accent)}
+.value{font:800 .78em var(--display);color:var(--text);font-variant-numeric:tabular-nums}
+.mute-btn{cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid var(--line);background:var(--bg2);
+  color:var(--muted);border-radius:8px;padding:5px 4px;font:700 .64em var(--font);letter-spacing:.03em;transition:.15s}
+.mute-btn svg{width:12px;height:12px;flex:none}
+.mute-btn:hover{border-color:var(--cyan);color:var(--text)}
+.mute-btn.on{color:#fff;border-color:var(--err);background:rgba(255,77,109,.16);box-shadow:0 0 10px rgba(255,77,109,.35)}
+.empty-mixer{flex:1;text-align:center;color:var(--muted);font-size:.85em;padding:30px 10px}
+
+/* Perfiles */
+.profiles{display:flex;gap:clamp(8px,2vw,12px);justify-content:center;flex-wrap:wrap}
+.profile-btn{cursor:pointer;text-align:center;padding:9px 15px;border-radius:999px;border:1px solid var(--line);position:relative;
+  background:var(--panel2);color:var(--muted);font:700 .76em var(--display);letter-spacing:.07em;transition:.18s;text-transform:uppercase;white-space:nowrap}
+.profile-btn:hover{border-color:var(--purple);color:var(--text);transform:translateY(-1px)}
+.profile-btn.active{color:#fff;border-color:var(--pink);background:linear-gradient(135deg,rgba(var(--pink-rgb),.28),rgba(var(--purple-rgb),.22));box-shadow:var(--glow)}
+.profile-btn.changed::after{content:"";position:absolute;top:3px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--warn);box-shadow:0 0 5px var(--warn)}
+.profile-btn kbd{font:600 .8em var(--font);color:var(--faint);margin-right:6px}
+.profile-btn.active kbd{color:rgba(255,255,255,.6)}
+.profile-btn.profile-add{border-style:dashed;padding:9px 15px}
+.profile-btn.profile-add:hover{color:var(--pink-soft);border-color:var(--pink)}
+.inline-input{background:var(--bg2);border:1px solid var(--purple);color:var(--text);border-radius:999px;padding:9px 16px;
+  font:700 .76em var(--display);letter-spacing:.05em;outline:none;width:160px;max-width:44vw}
+.inline-input:focus{box-shadow:0 0 0 1px var(--purple)}
+
+/* ---------- Ajustes ---------- */
+dialog{margin:auto;width:min(580px,94vw);max-height:92dvh;overflow:auto;scrollbar-width:none;background:var(--panel);color:var(--text);
+  border:1px solid var(--purple);border-radius:16px;padding:0;box-shadow:0 0 24px rgba(var(--purple-rgb),.3)}
+dialog::backdrop{background:rgba(var(--bg-rgb),.85)}
+dialog::-webkit-scrollbar{display:none}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+.dlg-h h2{font:800 .92em var(--display);letter-spacing:.12em}
+.dlg-h h2 b{color:var(--pink)}
+.dlg-tabs{display:flex;gap:6px;padding:10px 18px 0;position:sticky;top:0;background:var(--panel);z-index:2}
+.dlg-tabs button{cursor:pointer;flex:1;min-width:0;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:9px;
+  padding:7px 6px;font:700 .7em var(--display);letter-spacing:.07em;transition:.15s}
+.dlg-tabs button:hover{color:var(--text)}
+.dlg-tabs button.on{color:#fff;border-color:var(--pink);background:rgba(var(--pink-rgb),.14);box-shadow:var(--glow)}
+.dlg-b{padding:14px 18px 6px;display:grid;gap:16px}
+.dlg-b fieldset[data-tab]:not(.tab-on){display:none}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 14px 14px;display:grid;gap:10px;min-width:0}
+legend{padding:0 8px;font:700 .78em var(--display);letter-spacing:.1em;color:var(--pink-soft)}
+label{display:grid;gap:4px;font-size:.78em;color:var(--muted)}
+input[type=text],input[type=password],select{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+  padding:9px 11px;font:inherit;font-size:1.02em;outline:none;width:100%;min-width:0}
+input[type=text]:focus,input[type=password]:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
+input::placeholder{color:var(--faint)}
+.pass{position:relative}
+.pass input{padding-right:40px}
+.pass button{position:absolute;right:4px;top:50%;transform:translateY(-50%);cursor:pointer;background:none;border:0;color:var(--muted);padding:6px 8px;border-radius:6px}
+.pass button:hover{color:var(--text)}
+.pass svg{width:16px;height:16px;display:block}
+.btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:8px 14px;font:600 .8em var(--font);transition:.15s}
+.btn:hover{border-color:var(--purple)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.pri{border-color:var(--pink);color:#fff;background:linear-gradient(135deg,rgba(var(--pink-rgb),.35),rgba(var(--purple-rgb),.3));box-shadow:var(--glow)}
+.btn.danger{border-color:rgba(255,77,109,.5);color:#ff9db0}
+.btn.danger:hover{border-color:var(--err);background:rgba(255,77,109,.1)}
+.btn.small{padding:5px 10px;font-size:.74em}
+.hint{font-size:.74em;color:var(--muted);line-height:1.55}
+.hint code,.hint kbd{background:var(--bg2);padding:1px 5px;border-radius:4px;color:var(--pink-soft);font:inherit}
+.note{display:none;font-size:.76em;line-height:1.45;padding:7px 10px;border-radius:8px}
+.note.show{display:block}
+.note.err{color:#ff9db0;background:rgba(255,77,109,.09);border:1px solid rgba(255,77,109,.35)}
+.note.ok{color:var(--ok);background:rgba(93,255,177,.07);border:1px solid rgba(93,255,177,.3)}
+.note.info{color:var(--muted);background:rgba(var(--purple-rgb),.08);border:1px solid var(--line)}
+.switch{display:flex;align-items:center;gap:10px;font-size:.86em;color:var(--text);cursor:pointer;position:relative}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.switch i{width:38px;height:22px;border-radius:999px;background:var(--line);position:relative;transition:.15s;flex:none}
+.switch i::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:.15s}
+.switch input:checked+i{background:rgba(var(--pink-rgb),.35)}
+.switch input:checked+i::after{left:19px;background:var(--pink);box-shadow:0 0 8px rgba(var(--pink-rgb),.7)}
+.switch input:focus-visible+i{outline:2px solid var(--cyan);outline-offset:2px}
+details.help{border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
+details.help summary{cursor:pointer;color:var(--muted);font-size:.78em}
+details.help ol{margin:8px 0 0 18px;display:grid;gap:4px}
+input[type=range].plain{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--line);outline:none;cursor:pointer;padding:0;border:0}
+input[type=range].plain::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px rgba(var(--pink-rgb),.7)}
+input[type=range].plain::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--pink);border:0}
+.rhead{display:flex;justify-content:space-between;align-items:baseline}
+.rhead b{color:var(--pink-soft);font-weight:600}
+
+/* Fuentes */
+.chmap-list{display:grid;gap:9px}
+.chmap-row{display:grid;grid-template-columns:20px minmax(0,1fr) minmax(0,1.25fr) 28px;gap:8px;align-items:center}
+.chmap-icon{width:18px;height:18px;display:flex}
+.chmap-icon svg{width:100%;height:100%}
+.chmap-row input,.chmap-row select{padding:7px 9px;font-size:.86em}
+.chmap-row select.missing{border-color:var(--warn);color:var(--warn)}
+.xbtn{cursor:pointer;background:transparent;border:0;color:var(--muted);width:28px;height:28px;border-radius:7px;display:grid;place-items:center}
+.xbtn:hover{color:#ff9db0;background:rgba(255,77,109,.14)}
+.xbtn svg{width:15px;height:15px}
+
+/* Perfiles en ajustes */
+.prof{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.prof[open]{border-color:rgba(var(--pink-rgb),.4)}
+.prof summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:9px 10px;font:700 .78em var(--display);letter-spacing:.06em;color:var(--pink-soft)}
+.prof summary::-webkit-details-marker{display:none}
+.prof summary::before{content:"▸";color:var(--muted);transition:.15s}
+.prof[open] summary::before{transform:rotate(90deg)}
+.prof summary .tag{font:600 .85em var(--font);letter-spacing:0;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.prof summary .sp{margin-left:auto;display:flex;gap:2px}
+.prof-body{padding:4px 12px 12px;display:grid;gap:9px}
+.prof-row{display:grid;grid-template-columns:minmax(60px,90px) 1fr 40px auto;gap:10px;align-items:center;font-size:.82em}
+.prof-row .lbl{display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.prof-row .lbl i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);flex:none}
+.prof-row .pv{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.prof-row .switch{font-size:.9em;color:var(--muted);gap:6px}
+.prof-row .switch i{width:32px;height:18px}
+.prof-row .switch i::after{width:12px;height:12px}
+.prof-row .switch input:checked+i::after{left:17px;background:var(--err);box-shadow:0 0 8px rgba(255,77,109,.7)}
+.prof-row .switch input:checked+i{background:rgba(255,77,109,.3)}
+.prof-name{display:flex;gap:8px;align-items:center}
+.prof-name input{flex:1}
+
+.themepick{display:grid;gap:6px;font-size:.78em;color:var(--muted)}
+.themes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.themes button{cursor:pointer;display:grid;gap:7px;justify-items:start;padding:9px 10px;border-radius:11px;
+  background:var(--tb);border:1px solid rgba(255,255,255,.08);color:#eee;font:600 .95em var(--font);text-align:left;transition:.15s}
+.themes button:hover{border-color:rgba(255,255,255,.25);transform:translateY(-1px)}
+.themes button.on{border-color:var(--ta);box-shadow:0 0 0 1px var(--ta),0 0 14px color-mix(in srgb,var(--ta) 45%,transparent)}
+.themes button i{display:flex;gap:3px}
+.themes button i b{width:13px;height:13px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:12px 18px 16px}
+
+/* Confirmación */
+#ask{width:min(380px,92vw)}
+#ask .dlg-b{padding:18px 18px 6px;font-size:.9em;line-height:1.5;color:var(--muted)}
+#ask .dlg-b b{color:var(--text)}
+
+#toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;z-index:50;
+  background:var(--panel2);border:1px solid var(--ok);color:var(--ok);padding:9px 16px;font:700 .76em var(--display);letter-spacing:.08em;
+  box-shadow:0 0 18px rgba(93,255,177,.3);transition:.25s;border-radius:12px;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.err{border-color:var(--err);color:#ff9db0;box-shadow:0 0 18px rgba(255,77,109,.3)}
+
+@media (max-width:480px){
+  .dlg-tabs{padding:10px 12px 0;gap:4px}.dlg-tabs button{font-size:.62em}
+  .dlg-b{padding:12px 12px 6px}
+  .chmap-row{grid-template-columns:18px minmax(0,1fr) 28px}
+  .chmap-row select{grid-column:2 / 3}
+  .prof-row{grid-template-columns:minmax(54px,70px) 1fr 34px auto}
+  .prof-row .switch span{display:none}
+}
+
+/* ---------- Modo compacto: ventanas bajas (docks de OBS) ----------
+   Cada canal pasa a ser una barra horizontal, como el mezclador de OBS. */
+@media (max-height:420px){
+  header{padding:4px 10px;gap:6px}
+  .crest{height:22px}
+  .brand h1{font-size:11px}
+  .pill{padding:3px 8px;font-size:.7em}
+  .iconbtn{min-height:24px;padding:0 7px;font-size:.78em}
+  .iconbtn .lbl{display:none}
+  main{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"banner banner" "profiles mixer";
+    align-items:start;padding:5px 8px 6px;gap:6px 8px;max-width:min(97vw,1100px) !important}
+  .banner{grid-area:banner;font-size:.72em;padding:5px 10px}
+  .mixer{grid-area:mixer;flex-direction:column;gap:7px;padding:8px 10px;min-width:0}
+  .channel{flex:none;display:grid;grid-template-columns:24px minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:9px;row-gap:3px;
+    grid-template-areas:"icon name value" "mute stage stage";align-items:center;padding:5px 10px;min-width:0}
+  .channel::before{left:0;right:auto;top:8px;bottom:8px;width:2px;height:auto}
+  .channel .icon{grid-area:icon;width:16px;height:16px}
+  .channel .name{grid-area:name;text-align:left;font-size:.7em;line-height:1}
+  .value{grid-area:value;text-align:right;font-size:.74em;line-height:1}
+  .mute-btn{grid-area:mute;width:22px;height:22px;padding:0;border-radius:6px}
+  .mute-btn span{display:none}
+  .stage{grid-area:stage;width:100%;min-width:180px;height:22px;overflow:visible}
+  .meter{inset:50% 0 auto 0;transform:translateY(-50%);width:100%;height:10px;border-radius:3px}
+  .meter-fill{background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 45%),
+      repeating-linear-gradient(90deg,rgba(5,3,9,.42) 0,rgba(5,3,9,.42) 2px,transparent 2px,transparent 7px),
+      linear-gradient(90deg,var(--ok) 0%,var(--ok) 60%,var(--warn) 80%,var(--err) 93%,var(--err) 100%);
+    clip-path:inset(0 calc((1 - var(--lvl,0)) * 100%) 0 0)}
+  .meter-peak{top:0;bottom:0;height:auto;width:2px;left:calc(var(--pk,0) * 100%);right:auto}
+  input[type=range].fader{top:50%;left:0;width:100%;height:20px;transform:translateY(-50%)}
+  input[type=range].fader::-webkit-slider-runnable-track{height:10px;background:transparent;box-shadow:none}
+  input[type=range].fader::-moz-range-track{height:10px;background:transparent}
+  input[type=range].fader::-webkit-slider-thumb{width:6px;height:18px;border-radius:2.5px;margin-top:-4px;
+    background:linear-gradient(180deg,#fff,#d9d2f2 22%,var(--panel2) 55%,var(--bg))}
+  input[type=range].fader::-moz-range-thumb{width:6px;height:18px;border-radius:2.5px}
+  .profiles{grid-area:profiles;flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:6px}
+  .profile-btn{width:110px;padding:6px 7px;font-size:.62em;overflow:hidden;text-overflow:ellipsis}
+  .profile-btn kbd{display:none}
+  .inline-input{width:110px;padding:6px 8px;font-size:.62em}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <button id="reopenBar" class="hdr-peek" title="Mostrar barra superior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    TyraMix
+  </button>
+  <header>
+    <div class="brand"><img class="crest" src="data:image/webp;base64,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" alt="Emblema de TyraMix"><h1>TYRA<b>MIX</b></h1></div>
+    <button class="pill" id="obsStatus" data-s="off" title="OBS desconectado"><span class="dot"></span><span id="obsStatusTxt">OBS</span></button>
+    <button class="iconbtn" id="openSettings" title="Ajustes">⚙ <span class="lbl">Ajustes</span></button>
+    <button class="iconbtn" id="hideBar" title="Ocultar barra superior" aria-expanded="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <div class="banner" id="setupBanner"><span id="bannerTxt"></span><button class="btn small pri" id="bannerBtn" type="button">Configurar</button></div>
+    <div class="mixer" id="mixer"></div>
+    <div class="profiles" role="tablist" aria-label="Perfiles de audio" id="profilesBar">
+      <button class="profile-btn profile-add" id="addProfileBtn" type="button" title="Crear un perfil con los volúmenes actuales">+</button>
+    </div>
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<dialog id="settings">
+  <div class="dlg-h"><h2>AJUSTES · <b>TYRAMIX</b></h2><button class="iconbtn" id="closeSettings" aria-label="Cerrar">✕</button></div>
+  <div class="dlg-tabs" id="dlgTabs">
+    <button type="button" data-tab="conn" class="on">CONEXIÓN</button>
+    <button type="button" data-tab="sources">FUENTES</button>
+    <button type="button" data-tab="profiles">PERFILES</button>
+    <button type="button" data-tab="general">GENERAL</button>
+  </div>
+  <div class="dlg-b">
+    <fieldset data-tab="conn">
+      <legend>OBS</legend>
+      <label>Dirección del servidor WebSocket
+        <input type="text" id="obsUrl" placeholder="ws://localhost:4455" autocomplete="off" spellcheck="false">
+      </label>
+      <label>Contraseña <span style="color:var(--faint)">(déjala vacía si desactivaste la autenticación)</span>
+        <span class="pass">
+          <input type="password" id="obsPass" placeholder="Contraseña de OBS WebSocket" autocomplete="new-password" spellcheck="false">
+          <button type="button" id="togglePass" title="Mostrar contraseña" aria-label="Mostrar contraseña"></button>
+        </span>
+      </label>
+      <div class="btns">
+        <button class="btn pri" id="btnConnect" type="button">Conectar</button>
+        <button class="btn" id="btnDisconnect" type="button">Desconectar</button>
+      </div>
+      <label class="switch"><input type="checkbox" id="autoConnect"><i></i><span>Conectar solo al abrir y reconectar si se corta</span></label>
+      <div class="note" id="connNote"></div>
+      <details class="help">
+        <summary>¿Cómo activo esto en OBS?</summary>
+        <ol class="hint">
+          <li>En OBS ve a <code>Herramientas → Ajustes del servidor WebSocket</code>.</li>
+          <li>Marca <code>Habilitar servidor WebSocket</code>.</li>
+          <li>Pulsa <code>Mostrar información de conexión</code> y copia aquí el puerto y la contraseña.</li>
+          <li>Si el puerto no es 4455, escribe <code>ws://localhost:TU_PUERTO</code>. Para controlar OBS en otro PC de tu red, usa su IP: <code>ws://192.168.x.x:4455</code>.</li>
+          <li>Para tenerlo dentro de OBS: <code>Docks → Docks de navegador personalizados</code> y pega la dirección de esta página.</li>
+        </ol>
+      </details>
+    </fieldset>
+
+    <fieldset data-tab="sources">
+      <legend>FUENTES DE AUDIO</legend>
+      <p class="hint">Elige qué fuente de OBS controla cada canal y ponle el nombre que quieras. La lista de OBS aparece al conectar.</p>
+      <div class="chmap-list" id="channelMapping"></div>
+      <div class="btns" id="addChannelRow"><button class="btn" type="button" id="addChannelBtn">+ Añadir canal</button></div>
+    </fieldset>
+
+    <fieldset data-tab="profiles">
+      <legend>PERFILES</legend>
+      <p class="hint">Cada perfil guarda un volumen y un silencio por canal. Ábrelo para ajustarlo, o pon el mezclador como quieras y pulsa <b>Guardar lo que suena</b>.</p>
+      <div id="profileEditors" style="display:grid;gap:8px"></div>
+      <label>
+        <span class="rhead"><span>Duración de la transición al cambiar de perfil</span><b id="fadeVal"></b></span>
+        <input type="range" class="plain" id="fadeRange" min="0" max="2000" step="50">
+      </label>
+    </fieldset>
+
+    <fieldset data-tab="general">
+      <legend>APARIENCIA</legend>
+      <div class="themepick"><span>Tema de color</span><div class="themes" id="themePick">
+          <button type="button" data-t="" style="--tb:#0f0a20;--ta:#ff1fd6"><i><b style="background:#ff1fd6"></b><b style="background:#8b5cf6"></b><b style="background:#22e6ea"></b></i>Neón</button>
+          <button type="button" data-t="midnight" style="--tb:#0b1222;--ta:#38bdf8"><i><b style="background:#38bdf8"></b><b style="background:#4f7dff"></b><b style="background:#818cf8"></b></i>Medianoche</button>
+          <button type="button" data-t="sakura" style="--tb:#1c0f18;--ta:#ff8fbf"><i><b style="background:#ff8fbf"></b><b style="background:#d36fae"></b><b style="background:#ffb9a1"></b></i>Sakura</button>
+          <button type="button" data-t="matrix" style="--tb:#06110c;--ta:#3ee07a"><i><b style="background:#3ee07a"></b><b style="background:#16a34a"></b><b style="background:#a3e635"></b></i>Terminal</button>
+          <button type="button" data-t="ember" style="--tb:#1a0e07;--ta:#fbbf24"><i><b style="background:#fbbf24"></b><b style="background:#ea580c"></b><b style="background:#fb923c"></b></i>Brasa</button>
+          <button type="button" data-t="graphite" style="--tb:#111114;--ta:#f4f4f5"><i><b style="background:#f4f4f5"></b><b style="background:#a1a1aa"></b><b style="background:#52525b"></b></i>Grafito</button>
+        </div></div>
+      <label class="switch"><input type="checkbox" id="soundsToggle"><i></i><span>Sonidos de la interfaz</span></label>
+      <label class="switch"><input type="checkbox" id="applyOnConnect"><i></i><span>Al conectar, aplicar el perfil activo</span></label>
+      <p class="hint">Atajos: <kbd>1</kbd>–<kbd>9</kbd> cambian de perfil · rueda del ratón sobre un canal para ajustar fino · doble clic en el porcentaje para volver al valor del perfil.</p>
+    </fieldset>
+
+    <fieldset data-tab="general">
+      <legend>COPIA DE SEGURIDAD</legend>
+      <p class="hint">Guarda tus canales y perfiles en un archivo. La contraseña de OBS nunca se incluye.</p>
+      <div class="btns">
+        <button class="btn" id="btnExport" type="button">Exportar archivo</button>
+        <button class="btn" id="btnImport" type="button">Importar archivo</button>
+        <input type="file" id="importFile" accept=".json,application/json" hidden>
+        <button class="btn danger" id="btnReset" type="button" style="margin-left:auto">Restablecer todo</button>
+      </div>
+      <div class="note" id="backupNote"></div>
+    </fieldset>
+  </div>
+  <div class="dlg-f"><button class="btn pri" id="doneSettings" type="button">Listo</button></div>
+</dialog>
+
+<dialog id="ask">
+  <div class="dlg-b" id="askTxt"></div>
+  <div class="dlg-f"><button class="btn" id="askNo" type="button">Cancelar</button><button class="btn danger" id="askYes" type="button">Eliminar</button></div>
+</dialog>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* =========================================================
+   Iconos (mismo trazo para todos)
+   ========================================================= */
+const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICONS = {
+  music: svg('<path d="M9 18V5l10-2v13"/><circle cx="7" cy="18" r="2.3" fill="currentColor" stroke="none"/><circle cx="17" cy="16" r="2.3" fill="currentColor" stroke="none"/>'),
+  mic: svg('<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/>'),
+  game: svg('<rect x="2" y="8" width="20" height="9" rx="4.5"/><line x1="7" y1="10.5" x2="7" y2="14.5"/><line x1="5" y1="12.5" x2="9" y2="12.5"/><circle cx="16" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="18.2" cy="13.5" r="1" fill="currentColor" stroke="none"/>'),
+  discord: svg('<path d="M4 5h16v11H8l-4 4V5z"/>'),
+  speaker: svg('<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9a4.5 4.5 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/>'),
+  muted: svg('<path d="M4 9v6h4l5 4V5L8 9H4z"/><line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/>'),
+  trash: svg('<path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/>'),
+  eye: svg('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+  eyeOff: svg('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1.1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>')
+};
+const BASE_CHANNELS = [
+  { key:'music',   label:'Música',     accent:'#22e6ea' },
+  { key:'mic',     label:'Micrófono',  accent:'#ff1fd6' },
+  { key:'game',    label:'Juego',      accent:'#8b5cf6' },
+  { key:'discord', label:'Discord',    accent:'#7c8cff' }
+];
+const EXTRA_ACCENTS = ['#ffc857','#5dffb1','#ff6b6b','#4dd0ff','#b98bff','#ffa1e0','#7ee787','#ffb3c7'];
+const MAX_CUSTOM = 8;
+
+/* =========================================================
+   Configuración
+   ========================================================= */
+const STORE_KEY = 'tyramix_config_v1';
+function defaultConfig(){
+  return {
+    obs:{ url:'ws://localhost:4455', password:'' },
+    autoConnect:false, applyOnConnect:false, soundsEnabled:true, barHidden:false, theme:'', fadeMs:380,
+    activeProfile:'inicio',
+    sources:{ music:'', mic:'', game:'', discord:'' },
+    labels:{}, customChannels:[],
+    profileList:[ { key:'inicio', label:'Inicio' }, { key:'justchatting', label:'Just Chatting' }, { key:'game', label:'Juego' } ],
+    profiles:{
+      inicio:       { music:{vol:80,mute:false}, mic:{vol:60,mute:true},  game:{vol:50,mute:true},  discord:{vol:40,mute:true} },
+      justchatting: { music:{vol:22,mute:false}, mic:{vol:85,mute:false}, game:{vol:0, mute:true},  discord:{vol:35,mute:true} },
+      game:         { music:{vol:15,mute:false}, mic:{vol:70,mute:false}, game:{vol:80,mute:false}, discord:{vol:55,mute:false} }
+    }
+  };
+}
+const clampVol = v => Math.max(0, Math.min(100, Math.round(Number(v) || 0)));
+// rellena lo que falte (canales nuevos, perfiles a medias) y descarta lo que no tenga sentido
+function normalizeConfig(raw){
+  raw = raw && typeof raw === 'object' ? raw : {};
+  const d = defaultConfig();
+  const c = { ...d, ...raw, obs:{ ...d.obs, ...(raw.obs || {}) }, sources:{ ...d.sources, ...(raw.sources || {}) }, labels:{ ...(raw.labels || {}) } };
+  c.customChannels = (Array.isArray(raw.customChannels) ? raw.customChannels : [])
+    .filter(x => x && x.key && x.label).slice(0, MAX_CUSTOM)
+    .map((x, i) => ({ key:String(x.key), label:String(x.label).slice(0, 18), accent: /^#[0-9a-f]{6}$/i.test(x.accent) ? x.accent : EXTRA_ACCENTS[i % EXTRA_ACCENTS.length] }));
+  c.profileList = (Array.isArray(raw.profileList) ? raw.profileList : []).filter(p => p && p.key && p.label).map(p => ({ key:String(p.key), label:String(p.label).slice(0, 24) }));
+  if(!c.profileList.length) c.profileList = d.profileList;
+  c.profiles = raw.profiles && typeof raw.profiles === 'object' ? raw.profiles : d.profiles;
+  const keys = BASE_CHANNELS.map(x => x.key).concat(c.customChannels.map(x => x.key));
+  keys.forEach(k => { if(typeof c.sources[k] !== 'string') c.sources[k] = ''; });
+  c.profileList.forEach(p => {
+    const pr = c.profiles[p.key] = c.profiles[p.key] || {};
+    keys.forEach(k => { const v = pr[k] || {}; pr[k] = { vol: clampVol(v.vol == null ? 50 : v.vol), mute: !!v.mute }; });
+  });
+  if(!c.profileList.some(p => p.key === c.activeProfile)) c.activeProfile = c.profileList[0].key;
+  c.fadeMs = Math.max(0, Math.min(2000, Number(c.fadeMs) || 0));
+  if(raw.fadeMs == null) c.fadeMs = 380;
+  return c;
+}
+function loadConfig(){
+  try{ const raw = localStorage.getItem(STORE_KEY); return raw ? normalizeConfig(JSON.parse(raw)) : defaultConfig(); }
+  catch{ return defaultConfig(); }
+}
+let saveTimer = null;
+function saveConfig(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { try{ localStorage.setItem(STORE_KEY, JSON.stringify(config)); }catch{} }, 120);
+}
+let config = loadConfig();
+
+function getChannels(){
+  return BASE_CHANNELS.map(c => ({ key:c.key, label: config.labels[c.key] || c.label, accent:c.accent, icon:ICONS[c.key], custom:false }))
+    .concat(config.customChannels.map(c => ({ key:c.key, label:c.label, accent:c.accent, icon:ICONS.speaker, custom:true })));
+}
+const channelKeys = () => getChannels().map(c => c.key);
+function slugify(label, used, fallback){
+  let base = String(label).trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '') || fallback;
+  let key = base, i = 2;
+  while(used.has(key)) key = base + '-' + i++;
+  return key;
+}
+
+/* estado en vivo de cada canal */
+let live = {};
+const ensureLive = k => live[k] || (live[k] = { vol:0, mute:false, lvl:0, shown:0, peak:0, peakAt:0 });
+channelKeys().forEach(ensureLive);
+
+/* =========================================================
+   Tema
+   ========================================================= */
+function applyTheme(t){ if(t) document.documentElement.dataset.theme = t; else document.documentElement.removeAttribute('data-theme'); }
+function paintThemePick(){ $('#themePick').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.t === (config.theme || ''))); }
+$('#themePick').addEventListener('click', e => {
+  const b = e.target.closest('button[data-t]'); if(!b) return;
+  config.theme = b.dataset.t; applyTheme(config.theme); paintThemePick(); saveConfig(); SFX.click();
+});
+applyTheme(config.theme);
+
+/* =========================================================
+   Sonidos de la interfaz (sintetizados, cortos y suaves)
+   ========================================================= */
+let audioCtx = null;
+function actx(){
+  if(!audioCtx){ const AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; audioCtx = new AC(); }
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq, { dur = .08, type = 'sine', gain = .045, slide = null, at = 0 } = {}){
+  if(!config.soundsEnabled) return;
+  const ac = actx(); if(!ac) return;
+  try{
+    const t = ac.currentTime + at, o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if(slide) o.frequency.exponentialRampToValueAtTime(slide, t + dur);
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + .008);
+    g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + dur + .02);
+  }catch{}
+}
+const SFX = {
+  click:   () => tone(760, { dur:.05 }),
+  tick:    () => tone(540, { dur:.03, type:'triangle', gain:.025 }),
+  muteOn:  () => tone(330, { dur:.12, slide:150 }),
+  muteOff: () => tone(380, { dur:.1, slide:680 }),
+  profile: () => { tone(523.25, { dur:.1, type:'triangle' }); tone(783.99, { dur:.14, type:'triangle', at:.08 }); },
+  ok:      () => { tone(600, { dur:.08 }); tone(900, { dur:.14, at:.08 }); },
+  err:     () => tone(240, { dur:.24, type:'triangle', gain:.05, slide:110 })
+};
+
+/* =========================================================
+   Avisos
+   ========================================================= */
+let toastTimer = null;
+function toast(msg, err){
+  const el = $('#toast'); el.textContent = msg; el.className = err ? 'err' : '';
+  requestAnimationFrame(() => el.classList.add('show'));
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+function note(id, kind, text){ const el = $('#'+id); el.className = 'note' + (text ? ' show ' + kind : ''); el.textContent = text || ''; }
+// confirmación con el estilo del panel (en vez del cuadro gris del navegador)
+function ask(html, yes = 'Eliminar'){
+  return new Promise(resolve => {
+    const d = $('#ask'); $('#askTxt').innerHTML = html; $('#askYes').textContent = yes;
+    const done = v => { d.close(); resolve(v); };
+    $('#askYes').onclick = () => done(true);
+    $('#askNo').onclick = () => done(false);
+    d.oncancel = e => { e.preventDefault(); done(false); };
+    d.showModal(); $('#askNo').focus();
+  });
+}
+
+/* =========================================================
+   obs-websocket v5
+   ========================================================= */
+const SUBSCRIPTIONS = 1 /* General */ | 8 /* Inputs */ | 65536 /* InputVolumeMeters */;
+let ws = null, obsReady = false, seq = 0, wantConnection = false, retryTimer = null, retryDelay = 2000, lastError = '';
+const pending = new Map();
+let obsInputs = [];
+
+async function sha256b64(str){
+  const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return btoa(String.fromCharCode(...new Uint8Array(h)));
+}
+const send = obj => { if(ws && ws.readyState === 1) ws.send(JSON.stringify(obj)); };
+function request(requestType, requestData = {}){
+  return new Promise((resolve, reject) => {
+    if(!obsReady) return reject(new Error('sin conexión'));
+    const requestId = 'r' + (++seq);
+    const timer = setTimeout(() => { pending.delete(requestId); reject(new Error('OBS no respondió')); }, 5000);
+    pending.set(requestId, { resolve, reject, timer });
+    send({ op:6, d:{ requestType, requestId, requestData } });
+  });
+}
+function setStatus(s, text){
+  const el = $('#obsStatus'); el.dataset.s = s; el.title = text;
+  $('#obsStatusTxt').textContent = s === 'ok' ? 'OBS' : s === 'connecting' ? 'Conectando…' : 'OBS';
+}
+function connectOBS(fromUser){
+  if(ws && ws.readyState <= 1) return;
+  clearTimeout(retryTimer);
+  wantConnection = true;
+  const url = (config.obs.url || '').trim() || 'ws://localhost:4455';
+  setStatus('connecting', 'Conectando a OBS…');
+  if(fromUser) note('connNote', 'info', 'Conectando a ' + url + '…');
+  let sock;
+  try{ sock = new WebSocket(url); }
+  catch{ setStatus('error', 'Dirección no válida'); note('connNote', 'err', 'La dirección no es válida. Debe empezar por ws:// (o wss://).'); wantConnection = false; return; }
+  ws = sock;
+  sock.onmessage = onMessage;
+  sock.onclose = ev => {
+    if(ws !== sock) return;
+    const was = obsReady;
+    ws = null; obsReady = false;
+    pending.forEach(p => { clearTimeout(p.timer); p.reject(new Error('conexión cerrada')); }); pending.clear();
+    resetMeters(); toggleBanner();
+    // códigos de obs-websocket: 4009 = contraseña incorrecta, 4010 = versión no compatible
+    if(ev.code === 4009){
+      wantConnection = false; lastError = 'auth';
+      setStatus('error', 'Contraseña incorrecta');
+      note('connNote', 'err', 'OBS rechazó la contraseña. Cópiala otra vez desde "Mostrar información de conexión".');
+      if(!$('#settings').open) toast('✕ CONTRASEÑA DE OBS INCORRECTA', true);
+      SFX.err(); return;
+    }
+    if(ev.code === 4010){
+      wantConnection = false;
+      setStatus('error', 'Versión de OBS no compatible');
+      note('connNote', 'err', 'Tu OBS es muy antiguo: TyraMix necesita OBS 28 o posterior (WebSocket 5).');
+      return;
+    }
+    if(was){ toast('✕ SE PERDIÓ LA CONEXIÓN CON OBS', true); SFX.err(); }
+    else if(fromUser && lastError !== 'retry'){ note('connNote', 'err', 'No pude conectar. Revisa que OBS esté abierto, que el servidor WebSocket esté activado y que el puerto sea el correcto.'); SFX.err(); }
+    if(wantConnection && config.autoConnect){
+      lastError = 'retry';
+      setStatus('connecting', 'Reintentando en ' + Math.round(retryDelay / 1000) + ' s…');
+      retryTimer = setTimeout(() => connectOBS(false), retryDelay);
+      retryDelay = Math.min(retryDelay * 1.6, 15000);
+    } else {
+      wantConnection = false;
+      setStatus(was ? 'error' : 'error', was ? 'Desconectado' : 'No se pudo conectar');
+    }
+  };
+}
+function disconnectOBS(){
+  wantConnection = false; clearTimeout(retryTimer);
+  if(ws){ const s = ws; ws = null; obsReady = false; try{ s.close(); }catch{} }
+  pending.forEach(p => { clearTimeout(p.timer); p.reject(new Error('desconectado')); }); pending.clear();
+  setStatus('off', 'OBS desconectado'); note('connNote', 'info', 'Desconectado de OBS.');
+  resetMeters(); toggleBanner();
+}
+async function onMessage(ev){
+  let msg; try{ msg = JSON.parse(ev.data); }catch{ return; }
+  const d = msg.d || {};
+  if(msg.op === 0){                                  // Hello
+    const identify = { rpcVersion: 1, eventSubscriptions: SUBSCRIPTIONS };
+    if(d.authentication){
+      const pass = config.obs.password || '';
+      if(!pass){ note('connNote', 'err', 'OBS pide contraseña. Escríbela arriba y vuelve a conectar.'); wantConnection = false; try{ ws.close(); }catch{} return; }
+      identify.authentication = await sha256b64(await sha256b64(pass + d.authentication.salt) + d.authentication.challenge);
+    }
+    send({ op:1, d:identify });
+  } else if(msg.op === 2){                           // Identified
+    obsReady = true; retryDelay = 2000; lastError = '';
+    setStatus('ok', 'OBS conectado' + (d.negotiatedRpcVersion ? '' : ''));
+    note('connNote', 'ok', '¡Conectado a OBS!');
+    SFX.ok(); toggleBanner();
+    onConnected();
+  } else if(msg.op === 5){
+    handleEvent(d.eventType, d.eventData || {});
+  } else if(msg.op === 7){
+    const p = pending.get(d.requestId); if(!p) return;
+    pending.delete(d.requestId); clearTimeout(p.timer);
+    d.requestStatus && d.requestStatus.result ? p.resolve(d.responseData || {}) : p.reject(new Error((d.requestStatus && d.requestStatus.comment) || 'error de OBS'));
+  }
+}
+async function refreshInputs(){
+  try{
+    const res = await request('GetInputList');
+    obsInputs = (res.inputs || []).map(i => i.inputName).sort((a, b) => a.localeCompare(b, 'es'));
+  }catch{}
+  renderChannelMapping(); toggleBanner();
+}
+async function readChannel(key){
+  const src = config.sources[key]; if(!src || !obsReady) return;
+  try{
+    const [v, m] = await Promise.all([request('GetInputVolume', { inputName:src }), request('GetInputMute', { inputName:src })]);
+    setChannelUI(key, (v.inputVolumeMul || 0) * 100, !!m.inputMuted);
+  }catch{}
+}
+async function onConnected(){
+  await refreshInputs();
+  if(config.applyOnConnect) applyProfile(config.activeProfile, { quiet:true });
+  else await Promise.all(channelKeys().map(readChannel));
+  markProfileChanged();
+}
+const keysForSource = name => channelKeys().filter(k => config.sources[k] && config.sources[k] === name);
+// mientras animamos un perfil, OBS nos devuelve cada paso: esos ecos no deben mover el fader
+const animating = new Set();
+function handleEvent(type, data){
+  if(type === 'InputVolumeMeters'){
+    const now = performance.now();
+    (data.inputs || []).forEach(inp => {
+      const keys = keysForSource(inp.inputName); if(!keys.length) return;
+      let peak = 0;
+      (inp.inputLevelsMul || []).forEach(ch => { if(Array.isArray(ch)) ch.forEach(v => { if(typeof v === 'number' && v > peak) peak = v; }); });
+      // escala en decibelios (de -60 dB a 0 dB), como el mezclador de OBS
+      const lvl = peak > 0 ? Math.max(0, Math.min(1, (20 * Math.log10(peak) + 60) / 60)) : 0;
+      keys.forEach(k => { const L = ensureLive(k); L.lvl = lvl; if(lvl >= L.peak){ L.peak = lvl; L.peakAt = now; } });
+    });
+    return;
+  }
+  if(type === 'InputVolumeChanged'){
+    keysForSource(data.inputName).forEach(k => { if(!animating.has(k)) setChannelUI(k, (data.inputVolumeMul || 0) * 100, live[k].mute); });
+    markProfileChanged();
+  } else if(type === 'InputMuteStateChanged'){
+    keysForSource(data.inputName).forEach(k => setChannelUI(k, live[k].vol, !!data.inputMuted));
+    markProfileChanged();
+  } else if(type === 'InputNameChanged'){
+    // si renombras la fuente en OBS, el canal la sigue
+    let touched = false;
+    channelKeys().forEach(k => { if(config.sources[k] === data.oldInputName){ config.sources[k] = data.inputName; touched = true; } });
+    if(touched) saveConfig();
+    refreshInputs();
+  } else if(type === 'InputCreated' || type === 'InputRemoved'){
+    refreshInputs();
+  }
+}
+
+/* =========================================================
+   Mezclador
+   ========================================================= */
+const mixerEl = $('#mixer'), mainEl = $('main');
+const compactQuery = window.matchMedia('(max-height:420px)');
+function updateMixerWidth(){
+  if(compactQuery.matches){ mainEl.style.maxWidth = ''; return; }
+  mainEl.style.maxWidth = Math.min(Math.max(540, getChannels().length * 102 + 40), 1100) + 'px';
+}
+compactQuery.addEventListener('change', updateMixerWidth);
+function renderMixer(){
+  updateMixerWidth();
+  mixerEl.innerHTML = '';
+  getChannels().forEach(ch => {
+    ensureLive(ch.key);
+    const el = document.createElement('div');
+    el.className = 'channel'; el.id = 'ch-' + ch.key; el.style.setProperty('--accent', ch.accent);
+    el.innerHTML = `
+      <span class="icon">${ch.icon}</span>
+      <span class="name" title="${esc(ch.label)}">${esc(ch.label)}</span>
+      <div class="stage">
+        <div class="meter"><div class="meter-fill"></div><div class="meter-peak"></div></div>
+        <input type="range" class="fader" min="0" max="100" value="0" aria-label="Volumen de ${esc(ch.label)}">
+      </div>
+      <span class="value" title="Doble clic: volver al valor del perfil">0%</span>
+      <button class="mute-btn" type="button" aria-pressed="false"></button>`;
+    mixerEl.appendChild(el);
+    const fader = el.querySelector('.fader');
+    fader.addEventListener('input', () => onFaderInput(ch.key, fader.value));
+    fader.addEventListener('change', () => { SFX.tick(); markProfileChanged(); });
+    el.querySelector('.stage').addEventListener('wheel', e => {
+      e.preventDefault();
+      const v = clampVol(live[ch.key].vol + (e.deltaY < 0 ? 2 : -2));
+      fader.value = v; onFaderInput(ch.key, v); markProfileChanged();
+    }, { passive:false });
+    el.querySelector('.value').addEventListener('dblclick', () => {
+      const pv = config.profiles[config.activeProfile][ch.key];
+      if(pv) animateChannelTo(ch.key, pv.vol, live[ch.key].mute, 220).then(markProfileChanged);
+    });
+    el.querySelector('.mute-btn').addEventListener('click', () => toggleMute(ch.key));
+    setChannelUI(ch.key, live[ch.key].vol, live[ch.key].mute);
+    el.classList.toggle('unmapped', !config.sources[ch.key]);
+    el.title = config.sources[ch.key] ? 'Fuente de OBS: ' + config.sources[ch.key] : 'Sin fuente asignada (⚙ Ajustes → Fuentes)';
+  });
+}
+const db = v => v <= 0 ? '−∞ dB' : (20 * Math.log10(v / 100)).toFixed(1).replace('.', ',') + ' dB';
+function setChannelUI(key, vol, mute){
+  vol = clampVol(vol);
+  const L = ensureLive(key); L.vol = vol; L.mute = !!mute;
+  const el = document.getElementById('ch-' + key); if(!el) return;
+  const fader = el.querySelector('.fader');
+  if(document.activeElement !== fader || animating.has(key)) fader.value = vol;
+  const val = el.querySelector('.value'); val.textContent = vol + '%'; val.title = db(vol) + ' · doble clic: volver al valor del perfil';
+  el.classList.toggle('muted', !!mute);
+  const b = el.querySelector('.mute-btn');
+  b.classList.toggle('on', !!mute); b.setAttribute('aria-pressed', String(!!mute));
+  b.innerHTML = (mute ? ICONS.muted : ICONS.speaker) + `<span>${mute ? 'SILENCIADO' : 'SILENCIAR'}</span>`;
+  b.title = mute ? 'Activar sonido' : 'Silenciar';
+}
+const faderTimers = {};
+function onFaderInput(key, val){
+  val = clampVol(val);
+  const el = document.getElementById('ch-' + key);
+  live[key].vol = val; el.querySelector('.value').textContent = val + '%';
+  const src = config.sources[key]; if(!obsReady || !src) return;
+  clearTimeout(faderTimers[key]);
+  faderTimers[key] = setTimeout(() => request('SetInputVolume', { inputName:src, inputVolumeMul: val / 100 }).catch(() => {}), 40);
+}
+async function toggleMute(key){
+  const m = !live[key].mute;
+  setChannelUI(key, live[key].vol, m); m ? SFX.muteOn() : SFX.muteOff();
+  markProfileChanged();
+  const src = config.sources[key];
+  if(obsReady && src){
+    try{ await request('SetInputMute', { inputName:src, inputMuted:m }); }
+    catch{ setChannelUI(key, live[key].vol, !m); toast('✕ OBS NO PUDO CAMBIAR EL SILENCIO', true); }
+  }
+}
+// medidores: un solo bucle que suaviza la caída y deja la marca de pico un momento
+let meterLoop = 0;
+function drawMeters(now){
+  for(const key of Object.keys(live)){
+    const L = live[key], el = document.getElementById('ch-' + key); if(!el) continue;
+    L.shown = L.lvl > L.shown ? L.lvl : Math.max(L.lvl, L.shown - 0.018);
+    if(now - L.peakAt > 900) L.peak = Math.max(0, L.peak - 0.01);
+    el.style.setProperty('--lvl', L.shown.toFixed(3));
+    el.style.setProperty('--pk', L.peak.toFixed(3));
+    L.lvl *= 0.92;   // si OBS deja de mandar niveles (fuente oculta), el medidor baja solo
+  }
+  meterLoop = requestAnimationFrame(drawMeters);
+}
+meterLoop = requestAnimationFrame(drawMeters);
+function resetMeters(){ Object.values(live).forEach(L => { L.lvl = 0; L.peak = 0; }); }
+
+/* =========================================================
+   Perfiles
+   ========================================================= */
+function animateChannelTo(key, target, mute, duration){
+  return new Promise(resolve => {
+    const L = ensureLive(key), src = config.sources[key], from = L.vol;
+    target = clampVol(target);
+    const finish = () => {
+      setChannelUI(key, target, mute);
+      if(obsReady && src){
+        request('SetInputVolume', { inputName:src, inputVolumeMul: target / 100 }).catch(() => {});
+        request('SetInputMute', { inputName:src, inputMuted: !!mute }).catch(() => {});
+      }
+      setTimeout(() => animating.delete(key), 150);
+      resolve();
+    };
+    if(!duration || from === target){ finish(); return; }
+    animating.add(key);
+    // si el canal se va a silenciar, el silencio entra al final; si se va a activar, entra al principio
+    const midMute = mute && L.mute;
+    if(!mute && L.mute){ setChannelUI(key, from, false); if(obsReady && src) request('SetInputMute', { inputName:src, inputMuted:false }).catch(() => {}); }
+    const t0 = performance.now();
+    let sentAt = 0, sent = from;
+    (function step(now){
+      const p = Math.min(1, (now - t0) / duration);
+      const v = Math.round(from + (target - from) * (1 - Math.pow(1 - p, 3)));
+      setChannelUI(key, v, midMute);
+      if(obsReady && src && v !== sent && now - sentAt > 40){ sentAt = now; sent = v; request('SetInputVolume', { inputName:src, inputVolumeMul: v / 100 }).catch(() => {}); }
+      if(p < 1) requestAnimationFrame(step); else finish();
+    })(t0);
+  });
+}
+async function applyProfile(key, opts = {}){
+  const p = config.profiles[key]; if(!p) return;
+  config.activeProfile = key; saveConfig();
+  paintProfileButtons();
+  if(!opts.quiet) SFX.profile();
+  await Promise.all(channelKeys().map(k => { const v = p[k] || { vol:50, mute:false }; return animateChannelTo(k, v.vol, v.mute, opts.instant ? 0 : config.fadeMs); }));
+  markProfileChanged();
+}
+// punto amarillo en el perfil activo cuando lo que suena ya no coincide con lo guardado
+function markProfileChanged(){
+  const p = config.profiles[config.activeProfile]; if(!p) return;
+  const changed = channelKeys().some(k => config.sources[k] && p[k] && (Math.abs(p[k].vol - live[k].vol) > 1 || p[k].mute !== live[k].mute));
+  document.querySelectorAll('.profile-btn[data-profile]').forEach(b => {
+    const on = b.dataset.profile === config.activeProfile;
+    b.classList.toggle('changed', on && changed);
+    b.title = on && changed ? 'Cambiaste valores: guárdalos en ⚙ Ajustes → Perfiles si quieres conservarlos' : '';
+  });
+}
+const profilesBar = $('#profilesBar'), addProfileBtn = $('#addProfileBtn');
+function renderProfileButtons(){
+  profilesBar.querySelectorAll('.profile-btn[data-profile]').forEach(b => b.remove());
+  config.profileList.forEach((pm, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'profile-btn'; b.dataset.profile = pm.key; b.setAttribute('role', 'tab');
+    b.innerHTML = (i < 9 ? `<kbd>${i + 1}</kbd>` : '') + esc(pm.label);
+    b.addEventListener('click', () => applyProfile(pm.key));
+    profilesBar.insertBefore(b, addProfileBtn);
+  });
+  paintProfileButtons(); markProfileChanged();
+}
+function paintProfileButtons(){
+  profilesBar.querySelectorAll('.profile-btn[data-profile]').forEach(b => {
+    const on = b.dataset.profile === config.activeProfile;
+    b.classList.toggle('active', on); b.setAttribute('aria-selected', String(on));
+  });
+}
+function snapshot(){ const o = {}; channelKeys().forEach(k => { o[k] = { vol: live[k].vol, mute: live[k].mute }; }); return o; }
+function createProfile(label){
+  label = label.trim().slice(0, 24); if(!label) return;
+  const key = slugify(label, new Set(Object.keys(config.profiles)), 'perfil');
+  config.profileList.push({ key, label });
+  config.profiles[key] = snapshot();          // el perfil nuevo nace con lo que suena ahora
+  config.activeProfile = key; saveConfig();
+  renderProfileButtons(); renderProfileEditors();
+  toast('✓ PERFIL "' + label.toUpperCase() + '" CREADO');
+  SFX.profile();
+}
+async function deleteProfile(key){
+  if(config.profileList.length <= 1){ toast('✕ NECESITAS AL MENOS UN PERFIL', true); return; }
+  const pm = config.profileList.find(p => p.key === key);
+  if(!await ask(`¿Eliminar el perfil <b>${esc(pm ? pm.label : key)}</b>? No se puede deshacer.`)) return;
+  config.profileList = config.profileList.filter(p => p.key !== key);
+  delete config.profiles[key];
+  if(config.activeProfile === key) config.activeProfile = config.profileList[0].key;
+  saveConfig(); renderProfileButtons(); renderProfileEditors();
+}
+function inlineInput(container, before, placeholder, max, onDone){
+  if(container.querySelector('.inline-input')) return;
+  SFX.click();
+  const input = document.createElement('input');
+  input.type = 'text'; input.className = 'inline-input'; input.placeholder = placeholder; input.maxLength = max;
+  container.insertBefore(input, before); input.focus();
+  let done = false;
+  const finish = commit => { if(done) return; done = true; const v = input.value; input.remove(); if(commit && v.trim()) onDone(v); };
+  input.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); finish(true); } else if(e.key === 'Escape'){ e.preventDefault(); finish(false); } });
+  input.addEventListener('blur', () => finish(true));
+}
+addProfileBtn.addEventListener('click', () => inlineInput(profilesBar, addProfileBtn, 'Nombre del perfil', 24, createProfile));
+document.addEventListener('keydown', e => {
+  if(e.ctrlKey || e.metaKey || e.altKey || document.querySelector('dialog[open]')) return;
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '') && document.activeElement.type !== 'range') return;
+  const n = Number(e.key);
+  if(n >= 1 && n <= 9 && config.profileList[n - 1]){ e.preventDefault(); applyProfile(config.profileList[n - 1].key); }
+});
+
+/* =========================================================
+   Canales: añadir / renombrar / eliminar
+   ========================================================= */
+function createChannel(label){
+  label = label.trim().slice(0, 18); if(!label) return;
+  if(config.customChannels.length >= MAX_CUSTOM){ toast('✕ MÁXIMO ' + MAX_CUSTOM + ' CANALES EXTRA', true); return; }
+  const used = new Set(channelKeys());
+  const key = slugify(label, used, 'fuente');
+  const taken = new Set(config.customChannels.map(c => c.accent));
+  const accent = EXTRA_ACCENTS.find(a => !taken.has(a)) || EXTRA_ACCENTS[config.customChannels.length % EXTRA_ACCENTS.length];
+  config.customChannels.push({ key, label, accent });
+  config.sources[key] = '';
+  config.profileList.forEach(p => { config.profiles[p.key][key] = { vol:50, mute:false }; });
+  setChannelUI(key, 50, false);
+  saveConfig(); renderAll();
+}
+async function deleteChannel(key){
+  const ch = config.customChannels.find(c => c.key === key); if(!ch) return;
+  if(!await ask(`¿Eliminar el canal <b>${esc(ch.label)}</b>? Se quitará también de todos los perfiles.`)) return;
+  config.customChannels = config.customChannels.filter(c => c.key !== key);
+  delete config.sources[key]; delete live[key];
+  config.profileList.forEach(p => { delete config.profiles[p.key][key]; });
+  saveConfig(); renderAll();
+}
+function renameChannel(key, label){
+  label = label.trim().slice(0, 18);
+  const custom = config.customChannels.find(c => c.key === key);
+  if(custom){ if(label) custom.label = label; }
+  else {
+    const base = BASE_CHANNELS.find(c => c.key === key);
+    if(label && base && label !== base.label) config.labels[key] = label; else delete config.labels[key];
+  }
+  saveConfig(); renderMixer(); renderProfileEditors();
+}
+
+/* =========================================================
+   Ajustes
+   ========================================================= */
+const dlg = $('#settings');
+function showTab(t){
+  $('#dlgTabs').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  dlg.querySelectorAll('fieldset[data-tab]').forEach(f => f.classList.toggle('tab-on', f.dataset.tab === t));
+}
+$('#dlgTabs').addEventListener('click', e => { const b = e.target.closest('button[data-tab]'); if(b){ showTab(b.dataset.tab); SFX.click(); } });
+function openSettings(tab){
+  $('#obsUrl').value = config.obs.url; $('#obsPass').value = config.obs.password;
+  setPassVisible(false);
+  paintThemePick(); renderChannelMapping(); renderProfileEditors();
+  showTab(tab || (obsReady ? 'sources' : 'conn'));
+  if(!dlg.open) dlg.showModal();
+}
+$('#openSettings').addEventListener('click', () => { SFX.click(); openSettings(); });
+$('#obsStatus').addEventListener('click', () => { SFX.click(); openSettings('conn'); });
+$('#closeSettings').addEventListener('click', () => dlg.close());
+$('#doneSettings').addEventListener('click', () => dlg.close());
+$('#bannerBtn').addEventListener('click', () => openSettings(obsReady ? 'sources' : 'conn'));
+function readConn(){
+  config.obs.url = $('#obsUrl').value.trim() || 'ws://localhost:4455';
+  config.obs.password = $('#obsPass').value;
+  saveConfig();
+}
+$('#obsUrl').addEventListener('change', readConn);
+$('#obsPass').addEventListener('change', readConn);
+$('#btnConnect').addEventListener('click', () => {
+  readConn(); SFX.click(); lastError = '';
+  if(ws){ const s = ws; ws = null; obsReady = false; try{ s.close(); }catch{} }
+  connectOBS(true);
+});
+$('#btnDisconnect').addEventListener('click', () => { SFX.click(); disconnectOBS(); });
+function setPassVisible(v){
+  $('#obsPass').type = v ? 'text' : 'password';
+  const b = $('#togglePass'); b.innerHTML = v ? ICONS.eyeOff : ICONS.eye;
+  b.title = v ? 'Ocultar contraseña' : 'Mostrar contraseña'; b.setAttribute('aria-label', b.title);
+}
+$('#togglePass').addEventListener('click', () => setPassVisible($('#obsPass').type === 'password'));
+// la contraseña se oculta sola al cerrar ajustes (por si estás en directo con la ventana a la vista)
+dlg.addEventListener('close', () => setPassVisible(false));
+
+$('#autoConnect').checked = !!config.autoConnect;
+$('#autoConnect').addEventListener('change', e => { config.autoConnect = e.target.checked; saveConfig(); });
+$('#applyOnConnect').checked = !!config.applyOnConnect;
+$('#applyOnConnect').addEventListener('change', e => { config.applyOnConnect = e.target.checked; saveConfig(); });
+$('#soundsToggle').checked = !!config.soundsEnabled;
+$('#soundsToggle').addEventListener('change', e => { config.soundsEnabled = e.target.checked; saveConfig(); SFX.click(); });
+function paintFade(){ $('#fadeRange').value = config.fadeMs; $('#fadeVal').textContent = config.fadeMs ? (config.fadeMs / 1000).toFixed(2).replace('.', ',') + ' s' : 'Instantáneo'; }
+$('#fadeRange').addEventListener('input', e => { config.fadeMs = Number(e.target.value); paintFade(); saveConfig(); });
+paintFade();
+
+const mappingEl = $('#channelMapping');
+function renderChannelMapping(){
+  mappingEl.innerHTML = '';
+  getChannels().forEach(ch => {
+    const src = config.sources[ch.key] || '';
+    const missing = src && obsReady && obsInputs.length && !obsInputs.includes(src);
+    const opts = obsInputs.slice();
+    if(src && !opts.includes(src)) opts.unshift(src);
+    const row = document.createElement('div');
+    row.className = 'chmap-row';
+    row.innerHTML = `
+      <span class="chmap-icon" style="color:${ch.accent}">${ch.icon}</span>
+      <input type="text" maxlength="18" value="${esc(ch.label)}" aria-label="Nombre del canal">
+      <select class="${missing ? 'missing' : ''}" aria-label="Fuente de OBS" title="${missing ? 'Esta fuente ya no existe en OBS' : ''}">
+        <option value="">${obsReady ? '— Sin asignar —' : (src ? '' : '— Conecta OBS para elegir —')}</option>
+        ${opts.map(n => `<option value="${esc(n)}">${esc(n)}${n === src && missing ? ' (no está en OBS)' : ''}</option>`).join('')}
+      </select>
+      ${ch.custom ? `<button type="button" class="xbtn" title="Eliminar canal" aria-label="Eliminar canal">${ICONS.trash}</button>` : '<span></span>'}`;
+    mappingEl.appendChild(row);
+    const sel = row.querySelector('select');
+    sel.value = src;
+    sel.addEventListener('change', async () => {
+      config.sources[ch.key] = sel.value; saveConfig();
+      sel.classList.remove('missing');
+      renderMixer(); toggleBanner();
+      await readChannel(ch.key); markProfileChanged();
+    });
+    const name = row.querySelector('input');
+    name.addEventListener('change', () => renameChannel(ch.key, name.value));
+    name.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); name.blur(); } });
+    const del = row.querySelector('.xbtn');
+    if(del) del.addEventListener('click', () => deleteChannel(ch.key));
+  });
+  $('#addChannelBtn').disabled = config.customChannels.length >= MAX_CUSTOM;
+}
+$('#addChannelBtn').addEventListener('click', () => inlineInput($('#addChannelRow'), $('#addChannelBtn'), 'Nombre del canal', 18, createChannel));
+
+const editorsEl = $('#profileEditors');
+function renderProfileEditors(){
+  const open = new Set([...editorsEl.querySelectorAll('details[open]')].map(d => d.dataset.profile));
+  editorsEl.innerHTML = '';
+  config.profileList.forEach(pm => {
+    const det = document.createElement('details');
+    det.className = 'prof'; det.dataset.profile = pm.key; det.open = open.has(pm.key);
+    const rows = getChannels().map(ch => {
+      const v = config.profiles[pm.key][ch.key] || { vol:50, mute:false };
+      return `<div class="prof-row" style="--accent:${ch.accent}">
+        <span class="lbl" title="${esc(ch.label)}"><i></i>${esc(ch.label)}</span>
+        <input type="range" class="plain" min="0" max="100" value="${v.vol}" data-k="${ch.key}" aria-label="Volumen de ${esc(ch.label)}">
+        <span class="pv">${v.vol}%</span>
+        <label class="switch"><input type="checkbox" data-k="${ch.key}" ${v.mute ? 'checked' : ''}><i></i><span>Silencio</span></label>
+      </div>`;
+    }).join('');
+    det.innerHTML = `<summary><span>${esc(pm.label)}</span>${pm.key === config.activeProfile ? '<span class="tag">activo</span>' : ''}
+        <span class="sp"><button type="button" class="xbtn" data-a="del" title="Eliminar perfil" aria-label="Eliminar perfil">${ICONS.trash}</button></span></summary>
+      <div class="prof-body">
+        <div class="prof-name"><input type="text" maxlength="24" value="${esc(pm.label)}" aria-label="Nombre del perfil"></div>
+        ${rows}
+        <div class="btns">
+          <button type="button" class="btn small" data-a="snap" title="Copia en este perfil los volúmenes y silencios que tienes ahora">Guardar lo que suena</button>
+          <button type="button" class="btn small" data-a="apply">Aplicar ahora</button>
+        </div>
+      </div>`;
+    editorsEl.appendChild(det);
+    const prof = config.profiles[pm.key];
+    const live2 = () => { if(config.activeProfile === pm.key) applyProfile(pm.key, { quiet:true, instant:true }); };
+    det.querySelectorAll('input[type=range]').forEach(r => r.addEventListener('input', () => {
+      prof[r.dataset.k].vol = clampVol(r.value); r.nextElementSibling.textContent = r.value + '%'; saveConfig(); live2();
+    }));
+    det.querySelectorAll('input[type=checkbox]').forEach(c => c.addEventListener('change', () => { prof[c.dataset.k].mute = c.checked; saveConfig(); live2(); }));
+    const nm = det.querySelector('.prof-name input');
+    nm.addEventListener('change', () => {
+      const v = nm.value.trim().slice(0, 24); if(!v){ nm.value = pm.label; return; }
+      pm.label = v; saveConfig(); renderProfileButtons(); det.querySelector('summary span').textContent = v;
+    });
+    det.querySelector('[data-a=del]').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); deleteProfile(pm.key); });
+    det.querySelector('[data-a=snap]').addEventListener('click', () => {
+      config.profiles[pm.key] = snapshot(); saveConfig(); renderProfileEditors(); markProfileChanged();
+      toast('✓ GUARDADO EN "' + pm.label.toUpperCase() + '"'); SFX.ok();
+    });
+    det.querySelector('[data-a=apply]').addEventListener('click', () => applyProfile(pm.key));
+  });
+}
+
+/* ---------- copia de seguridad (sin contraseña) ---------- */
+function exportable(){
+  const c = JSON.parse(JSON.stringify(config));
+  c.obs = { url: c.obs.url };
+  return { app:'TyraMix', version:2, ...c };
+}
+$('#btnExport').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(exportable(), null, 2)], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'tyramix-ajustes.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  note('backupNote', 'ok', 'Archivo descargado (sin tu contraseña de OBS).');
+});
+$('#btnImport').addEventListener('click', () => $('#importFile').click());
+$('#importFile').addEventListener('change', async e => {
+  const f = e.target.files && e.target.files[0]; e.target.value = '';
+  if(!f) return;
+  try{
+    const raw = JSON.parse(await f.text());
+    if(!raw || typeof raw !== 'object' || !raw.profiles) throw new Error();
+    const keep = config.obs;
+    config = normalizeConfig(raw);
+    config.obs = { url: (raw.obs && raw.obs.url) || keep.url, password: keep.password };
+    saveConfig();
+    live = {}; channelKeys().forEach(ensureLive);
+    applyTheme(config.theme); paintThemePick(); paintFade();
+    ['autoConnect','applyOnConnect','soundsEnabled'].forEach(k => { const id = k === 'soundsEnabled' ? 'soundsToggle' : k; $('#'+id).checked = !!config[k]; });
+    renderAll(); await Promise.all(channelKeys().map(readChannel)); markProfileChanged();
+    note('backupNote', 'ok', 'Ajustes importados: ' + config.profileList.length + ' perfiles y ' + getChannels().length + ' canales.');
+  }catch{ note('backupNote', 'err', 'Ese archivo no es una copia de TyraMix válida.'); }
+});
+$('#btnReset').addEventListener('click', async () => {
+  if(!await ask('¿Restablecer TyraMix? Se borran tu conexión, tus canales y tus perfiles.', 'Restablecer')) return;
+  try{ localStorage.removeItem(STORE_KEY); }catch{}
+  clearTimeout(saveTimer); location.reload();
+});
+
+/* ---------- barra superior ---------- */
+const appEl = $('.app');
+function setBarHidden(h){
+  config.barHidden = h; saveConfig();
+  appEl.classList.toggle('hdr-collapsed', h);
+  const t = h ? 'Mostrar barra superior' : 'Ocultar barra superior';
+  $('#hideBar').title = t; $('#reopenBar').title = t; $('#hideBar').setAttribute('aria-expanded', String(!h));
+}
+$('#hideBar').addEventListener('click', () => { SFX.click(); setBarHidden(!appEl.classList.contains('hdr-collapsed')); });
+$('#reopenBar').addEventListener('click', () => { SFX.click(); setBarHidden(false); });
+
+/* ---------- aviso de primeros pasos ---------- */
+function toggleBanner(){
+  const mapped = channelKeys().some(k => config.sources[k]);
+  const b = $('#setupBanner');
+  let txt = '';
+  if(!obsReady && !mapped) txt = '<b>Primeros pasos:</b> conecta TyraMix con OBS y elige qué fuente controla cada canal.';
+  else if(!obsReady) txt = wantConnection ? 'Esperando a OBS…' : '<b>OBS no está conectado.</b> Los cambios no se aplicarán hasta que conectes.';
+  else if(!mapped) txt = '<b>¡Conectado!</b> Ahora elige qué fuente de OBS controla cada canal.';
+  b.classList.toggle('show', !!txt);
+  $('#bannerTxt').innerHTML = txt;
+  $('#bannerBtn').textContent = obsReady ? 'Elegir fuentes' : 'Conectar';
+  $('#bannerBtn').hidden = wantConnection && !obsReady;
+  document.querySelectorAll('.channel').forEach(el => el.classList.toggle('unmapped', !config.sources[el.id.slice(3)]));
+}
+
+function renderAll(){ renderMixer(); renderChannelMapping(); renderProfileButtons(); renderProfileEditors(); toggleBanner(); }
+
+/* =========================================================
+   Arranque
+   ========================================================= */
+renderAll();
+setBarHidden(!!config.barHidden);
+// sin OBS se muestran los valores del perfil activo; al conectar se leen los reales
+const ap = config.profiles[config.activeProfile];
+channelKeys().forEach(k => setChannelUI(k, ap[k].vol, ap[k].mute));
+setStatus('off', 'OBS desconectado');
+if(config.autoConnect) connectOBS(false);
+toggleBanner();
+})();
+</script>
+</body>
+</html>
